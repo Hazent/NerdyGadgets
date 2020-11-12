@@ -77,6 +77,7 @@ include "connect.php";
         </div>
         <ul id="ul-class-navigation">
             <li>
+                <a href="winkelmand.php" class="HrefDecoration">Winkelmand</a>
                 <a href="browse.php" class="HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i> Zoeken</a>
             </li>
         </ul>

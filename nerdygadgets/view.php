@@ -120,6 +120,7 @@ if ($R) {
                     <div class="CenterPriceLeftChild">
                         <p class="StockItemPriceText"><b><?php print sprintf("€ %.2f", $Result['SellPrice']); ?></b></p>
                         <h6> Inclusief BTW </h6>
+                        <button type="button">Toevoegen aan Winkelmand</button>
                     </div>
                 </div>
             </div>
