@@ -51,12 +51,13 @@ if(isset($_POST["toevoegen"])){
             $count = count($_SESSION["shopping_cart"]);
             $item_array = array(
                 'item_id' => $Result['StockItemID'],
-                'item_picture' => $Images[0],
-                'item_name' => $_POST['hiddenName'],
+                //'item_picture' => $Images[0],
+                'item_name' => $Result['StockItemName'],
                 'item_price' => $_POST['hiddenPrice'],
-                'item_count' => $_POST['value']
+                'item_count' => $_POST['count']
             );
             $_SESSION["shopping_cart"][$count] = $item_array;
+            echo '<script>alert("Product Toegevoegd")</script>';
         }else{
             echo '<script>alert("Item Already Added")</script>';
             echo '<script>window.location="winkelmand.php"</script>';
@@ -64,12 +65,13 @@ if(isset($_POST["toevoegen"])){
     } else{
         $item_array = array(
                 'item_id' => $Result["StockItemID"],
-                'item_picture' => $Images[0],
-                'item_name' => $_POST['hiddenName'],
+                //'item_picture' => $Images[0],
+                'item_name' => $Result['StockItemName'],
                 'item_price' => $_POST['hiddenPrice'],
-                'item_count' => $_POST['value']
+                'item_count' => $_POST['count']
         );
         $_SESSION['shopping_cart'][0] = $item_array;
+        echo '<script>alert("Product Toegevoegd")</script>';
     }
 }
 ?>
@@ -150,10 +152,21 @@ if(isset($_POST["toevoegen"])){
                         <p class="StockItemPriceText"><b><?php print sprintf("€ %.2f", $Result['SellPrice']); ?></b></p>
                         <h6> Inclusief BTW </h6>
                         <form method="post" action="view.php?id=<?php echo $Result['StockItemID']?>">
-                            <input type="text" name="value" value="1">
+                            <select name="count">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
                             <input type="hidden" name="hiddenName" value="<?php print $Result['StockItemName'];?>">
                             <input type="hidden" name="hiddenPrice" value="<?php print $Result['SellPrice'];?>">
-                            <input type="submit" name="toevoegen" class="ToevoegenKnop" value="Toevoegen aan Winkelmand">
+                            <input class="ToevoegenKnop" type="submit" name="toevoegen" value="Toevoegen aan Winkelmand">
                         </form>
                     </div>
                 </div>
