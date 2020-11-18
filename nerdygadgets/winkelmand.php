@@ -1,10 +1,10 @@
 <?php
 include __DIR__ . "/header.php";
 
-if(isset($_GET["action"])){
-    if($_GET["action"] == "delete"){
-        foreach ($_SESSION["shopping_cart"] as $keys => $values){
-            if($values["item_id"] == $_GET["id"]){
+if (isset($_GET["action"])) {
+    if ($_GET["action"] == "delete") {
+        foreach ($_SESSION["shopping_cart"] as $keys => $values) {
+            if ($values["item_id"] == $_GET["id"]) {
                 unset($_SESSION["shopping_cart"][$keys]);
                 echo '<script>alert("Item Removed")</script>';
                 echo '<script>window.location="winkelmand.php"</script>';
@@ -12,10 +12,10 @@ if(isset($_GET["action"])){
         }
     }
 }
-if(isset($_GET["submit"])){
+if (isset($_GET["submit"])) {
     $count = $_GET['number'];
-    foreach ($_SESSION["shopping_cart"] as $keys => $values){
-        if($values["item_id"] == $_GET["hidden_id"]){
+    foreach ($_SESSION["shopping_cart"] as $keys => $values) {
+        if ($values["item_id"] == $_GET["hidden_id"]) {
             $_SESSION['shopping_cart'][$keys]["item_count"] = $count;
         }
     }
@@ -33,21 +33,20 @@ if(isset($_GET["submit"])){
             <th width="10%">Change</th>
         </tr>
         <?php
-        if(!empty($_SESSION["shopping_cart"]))
-        {
+        if (!empty($_SESSION["shopping_cart"])) {
             $total = 0;
-            foreach ($_SESSION["shopping_cart"] as $keys => $values)
-            {
-                ?>
+            foreach ($_SESSION["shopping_cart"] as $keys => $values) {
+        ?>
                 <tr>
                     <td>Picture</td>
                     <td><?php echo $values["item_name"]; ?></td>
                     <td><?php echo $values["item_count"]; ?></td>
                     <td>€ <?php echo number_format($values["item_price"], 2); ?></td>
                     <td>€ <?php echo number_format($values["item_price"] * $values["item_count"], 2); ?></td>
-                    <td><a class="DeleteKnop" href="winkelmand.php?action=delete&id=<?php echo $values['item_id']?>">Delete</a></td>
-                    <td><form method="get" name="change">
-                            <input type="hidden" name="hidden_id" value="<?php echo $values["item_id"];?>">
+                    <td><a class="DeleteKnop" href="winkelmand.php?action=delete&id=<?php echo $values['item_id'] ?>">Delete</a></td>
+                    <td>
+                        <form method="get" name="change">
+                            <input type="hidden" name="hidden_id" value="<?php echo $values["item_id"]; ?>">
                             <select name="number">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -64,16 +63,24 @@ if(isset($_GET["submit"])){
                         </form>
                     </td>
                 </tr>
-                <?php
+        <?php
                 $total = $total + ($values["item_price"] * $values["item_count"]);
             }
-        } else{
+        } else {
             $total = 0;
         }
         ?>
     </table>
     <table class="total_table">
-        <td><br>Verzendkosten: € 5,65 <br> Total Price: € <?php echo number_format($total, 2);?> <br><br><button onclick="window.location.href='index.php'">Afrekenen</button></td>
+        <td>
+            <br>
+            Verzendkosten: € 5,65 
+            <br> 
+            Total Price: € <?php echo number_format($total, 2); ?> 
+            <br>
+            <br>
+            <a class="btn btn-primary btn-lg active" href="checkout.php">Afrekenen</a>
+        </td>
     </table>
 </div>
 <?php
