@@ -80,8 +80,11 @@ require "connect.php";
         </div>
         <ul id="ul-class-navigation">
             <li>
-                <a href="winkelmand.php" class="HrefDecoration">Winkelmand</a>
-                <a href="browse.php" class="HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i> Zoeken</a>
+                <a href="browse.php" class="HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i> Zoeken </a>
+                &ensp;|&ensp;
+                <a href="winkelmand.php" class="HrefDecoration"><i type="submit" ></i> Winkelmand</a>
+                &ensp;|&ensp;
+                <a href="login.php" class="HrefDecoration"><i type="submit" ></i> Login</a>
             </li>
         </ul>
     </div>

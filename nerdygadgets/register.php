@@ -6,19 +6,17 @@
     <style>
         div.middle {
             position: relative;
-            left: 650px;
+            margin: 0 auto;
             top: 100px;
         }
 
         div.login {
-            float: left;
             text-align: center;
             font-size: x-large;
         }
 
         div.left {
-
-            text-align: left;
+            text-align: center;
         }
 
         input.small {
@@ -26,7 +24,7 @@
             height: 20px;
         }
 
-        input[type=text] {
+        input[type=text], input[type=email] {
             position: center;
             color: #000000;
             font-size: x-large;
@@ -49,7 +47,7 @@
         }
 
         input[type=submit] {
-            width: 100%;
+            width: 20%;
             background-color: #4CAF50;
             color: white;
             padding: 0px 10px;
@@ -71,31 +69,32 @@
             <br> <br> <br>
             <div class="login">
                 <input required id="fullname" type="text" placeholder="Volledige naam" name="fullname"> <br>
-                <input required id="firstname" type="text" placeholder="voornaam" name="firstname"><br>
+                <input required id="firstname" type="text" placeholder="Voornaam" name="firstname"><br>
                 <input required id="username" type="text" placeholder="Gebruikersnaam*" name="username"><br>
-                <input required id="password" type="text" placeholder="wachtwoord" name="password"><br>
-                <input required id="phonenumber" type="text" placeholder="telefoonnummer" name="phonenumber"><br>
-                <input required id="faxnumber" type="text" placeholder="faxnummer" name="faxnumber"><br>
-                <input required id="emailaddress" type="text" placeholder="voorbeeld@voorbeeld.com" name="emailaddress"><br>
+                <input required id="password" type="password" placeholder="Wachtwoord" name="password"><br>
+                <input required id="phonenumber" type="text" placeholder="Telefoonnummer" name="phonenumber"><br>
+                <input required id="faxnumber" type="text" placeholder="Faxnummer" name="faxnumber"><br>
+                <input required id="emailaddress" type="email" placeholder="voorbeeld@voorbeeld.com" name="emailaddress"><br>
                 <div class="left">
                     <input type="checkbox" class="small" onclick="myFunction()"> Wachtwoord tonen<br><br>
                 </div>
 
                 <br>
-                <input type="submit" value="registreer">
+                <input type="submit" value="Registreer">
             </div>
         </div>
         <script>
             function myFunction() {
                 var x = document.getElementById("password");
-                if (x.type === "password") {
-                    x.type = "text";
-                } else {
+                if (x.type === "text") {
                     x.type = "password";
+                } else {
+                    x.type = "text";
                 }
             }
         </script>
     </form>
+    <br><br><br>
     <?php
     if (!empty($_POST["fullname"])) {
         $fullname = $_POST["fullname"];
@@ -118,7 +117,7 @@ values (?,?,?,?,?,?,?,?,?,?,?,?)";
         $Statement = mysqli_prepare($Connection, $query);
         mysqli_stmt_bind_param($Statement, "ssssiisiiiii", $fullname, $firstname, $username, $password, $phonenumber, $faxnumber, $emailaddress, $number, $issalesperson, $isemployee, $ispermittedtologon, $issytemuser);
         mysqli_stmt_execute($Statement);
-        echo '<script>alert("succesvol geregistreerd je wordt met 5 seconden doorverwezen naar de login pagina")</script>';
+        echo '<script>alert("Succesvol geregistreerd je wordt met 5 seconden doorverwezen naar de login pagina")</script>';
         sleep(5);
         echo '<script>window.location="login.php"</script>';
     }
@@ -129,3 +128,4 @@ values (?,?,?,?,?,?,?,?,?,?,?,?)";
 </fieldset>
 </body>
 </html>
+
