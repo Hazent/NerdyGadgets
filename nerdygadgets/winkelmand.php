@@ -25,9 +25,10 @@ if (isset($_GET["submit"])) {
     <table class="BorderWinkelmand">
         <tr>
             <th width="25%">Picture</th>
-            <th width="40%">Item Name</th>
+            <th width="35%">Item Name</th>
+            <th width="15%">Levertijd (dagen)</th>
             <th width="5%">Quantity</th>
-            <th width="20%">Price</th>
+            <th width="10%">Price</th>
             <th width="20%">Total</th>
             <th width="10%">Remove</th>
             <th width="10%">Change</th>
@@ -40,6 +41,7 @@ if (isset($_GET["submit"])) {
                 <tr>
                     <td>Picture</td>
                     <td><?php echo $values["item_name"]; ?></td>
+                    <td><?php echo rand(1,7) ?></td>
                     <td><?php echo $values["item_count"]; ?></td>
                     <td>€ <?php echo number_format($values["item_price"], 2); ?></td>
                     <td>€ <?php echo number_format($values["item_price"] * $values["item_count"], 2); ?></td>
