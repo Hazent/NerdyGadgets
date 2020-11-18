@@ -43,6 +43,35 @@ $R = mysqli_fetch_all($R, MYSQLI_ASSOC);
 if ($R) {
     $Images = $R;
 }
+
+if(isset($_POST["toevoegen"])){
+    if(isset($_SESSION["shopping_cart"])){
+        $item_array_id = array_column($_SESSION["shopping_cart"], "item_id");
+        if(!in_array($Result["StockItemID"], $item_array_id)){
+            $count = count($_SESSION["shopping_cart"]);
+            $item_array = array(
+                'item_id' => $Result['StockItemID'],
+                'item_picture' => $Images[0],
+                'item_name' => $_POST['hiddenName'],
+                'item_price' => $_POST['hiddenPrice'],
+                'item_count' => $_POST['value']
+            );
+            $_SESSION["shopping_cart"][$count] = $item_array;
+        }else{
+            echo '<script>alert("Item Already Added")</script>';
+            echo '<script>window.location="winkelmand.php"</script>';
+        }
+    } else{
+        $item_array = array(
+                'item_id' => $Result["StockItemID"],
+                'item_picture' => $Images[0],
+                'item_name' => $_POST['hiddenName'],
+                'item_price' => $_POST['hiddenPrice'],
+                'item_count' => $_POST['value']
+        );
+        $_SESSION['shopping_cart'][0] = $item_array;
+    }
+}
 ?>
 <div id="CenteredContent">
     <?php
@@ -120,11 +149,17 @@ if ($R) {
                     <div class="CenterPriceLeftChild">
                         <p class="StockItemPriceText"><b><?php print sprintf("€ %.2f", $Result['SellPrice']); ?></b></p>
                         <h6> Inclusief BTW </h6>
+                        <form method="post" action="view.php?id=<?php echo $Result['StockItemID']?>">
+                            <input type="text" name="value" value="1">
+                            <input type="hidden" name="hiddenName" value="<?php print $Result['StockItemName'];?>">
+                            <input type="hidden" name="hiddenPrice" value="<?php print $Result['SellPrice'];?>">
+                            <input type="submit" name="toevoegen" class="ToevoegenKnop" value="Toevoegen aan Winkelmand">
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-
+        <br/>
         <div id="StockItemDescription">
             <h3>Artikel beschrijving</h3>
             <p><?php print $Result['SearchDetails']; ?></p>
