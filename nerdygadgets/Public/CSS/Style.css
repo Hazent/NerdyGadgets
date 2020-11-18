@@ -481,3 +481,27 @@ ul#ul-class-price li {
 
 
 >>>>>>> 80817e383723ceea599ca0e90da185e5ed99043d
+=======
+    background: #676EFF;
+    font-weight: bold;
+    font-size: 13px;
+    color: white;
+}
+
+.DeleteKnop{
+     display: block;
+     color: #b21f2d;
+     position: center;
+}
+.BorderWinkelmand {
+    width: 100%;
+    border: 3px solid white;
+}
+.total_table{
+     text-align: left;
+     width: 20%;
+     position: relative;
+     left: 80%;
+     border: 3px solid #73AD21;
+}
+>>>>>>> e21955d92d6157a2247496341e2926a25338c8eb
