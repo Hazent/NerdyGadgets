@@ -3,7 +3,31 @@ include __DIR__ . "/header.php";
 ?>
 <div class="IndexStyle">
     <div class="col-11">
+    <table class="table table-striped" style="color: white !important;">
+    <thead>
+    <tr>
+      <th scope="col">product</th>
+      <th scope="col">levertijd</th>
+     
+    </tr>
+  </thead>
+  <tbody>
 
+  
+
+        <?php
+        if (!empty($_SESSION["shopping_cart"])) {
+            foreach ($_SESSION["shopping_cart"] as $keys => $values) {
+                echo "
+                <tr>
+                <td>".$values['item_name']."</td>
+                <td>".rand(1,7)." dagen</td>
+              </tr> ";
+            }
+        }
+        ?>
+  </tbody>
+</table>
         <form>
             <div class="form-group">
                 <label for="exampleInputEmail1">Adres + huisnummer</label>
