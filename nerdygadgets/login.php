@@ -77,28 +77,27 @@
     if (!empty($_POST["wachtwoord"]) && !empty($_POST["naam"])) {
         $wachtwoord = $_POST["wachtwoord"];
         $naam = $_POST["naam"];
-        $hashedwachtwoord = password_hash($wachtwoord, PASSWORD_BCRYPT);
-//        $hashedwachtwoord = "8024E8041C1F5BD98FE46983F98C2F5E53E2CD75BF4A6EF6AC13A299F10F714A";
 
 
         $Query = "
-        SELECT LogonName
+        SELECT LogonName, Hashedpassword
         FROM people
-        WHERE LogonName = ?
-        AND HashedPassword = ?";
+        WHERE LogonName = ?";
 
 #connection
         $Statement = mysqli_prepare($Connection, $Query);
-        mysqli_stmt_bind_param($Statement, 'ss', $naam, $hashedwachtwoord);
+        mysqli_stmt_bind_param($Statement, 's', $naam);
         mysqli_stmt_execute($Statement);
         $Result = mysqli_stmt_get_result($Statement);
         $Result = mysqli_fetch_all($Result, MYSQLI_ASSOC);
 
 
-        if (count($Result) == 1) {
-            print "succes";
+        $array = $Result["0"];
+        $Hashedpassword = $array["Hashedpassword"];
+        if(password_verify($wachtwoord, $Hashedpassword)) {
+            echo '<script>alert("Succesvol geregistreerd je wordt met 5 seconden doorverwezen naar de login pagina")</script>';
         } else {
-            print "Onjuiste gebruikersnaam en/of wachtwoord";
+            echo '<script>alert("Fout!")</script>';
         }
     }
 ?>

@@ -115,7 +115,7 @@
 values (?,?,?,?,?,?,?,?,?,?,?,?)";
 
         $Statement = mysqli_prepare($Connection, $query);
-        mysqli_stmt_bind_param($Statement, "ssssiisiiiii", $fullname, $firstname, $username, $password, $phonenumber, $faxnumber, $emailaddress, $number, $issalesperson, $isemployee, $ispermittedtologon, $issytemuser);
+        mysqli_stmt_bind_param($Statement, "ssssiisiiiii", $fullname, $firstname, $username, $hashedpassword, $phonenumber, $faxnumber, $emailaddress, $number, $issalesperson, $isemployee, $ispermittedtologon, $issytemuser);
         mysqli_stmt_execute($Statement);
         echo '<script>alert("Succesvol geregistreerd je wordt met 5 seconden doorverwezen naar de login pagina")</script>';
         sleep(5);
