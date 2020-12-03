@@ -6,7 +6,7 @@ include __DIR__ . "/header.php";
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
     $(document).ready(function(){
-        $("#myModal").modal('show');
+        setTimeout(() => { $("#myModal").modal('show'); }, 5000);
     });
 </script>
 <div class="IndexStyle">
