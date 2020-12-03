@@ -74,7 +74,7 @@ require "connect.php";
                     <a href="categories.php" class="HrefDecoration">Alle categorieën</a>
                 </li>
                 <li>
-                    <a href="contact.php" class="HrefDecoration">contact</a>
+                    <a href="contact.php" class="HrefDecoration">Contact</a>
                 </li>
             </ul>
         </div>

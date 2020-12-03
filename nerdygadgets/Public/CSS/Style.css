@@ -496,3 +496,7 @@ ul#ul-class-price li {
      left: 80%;
      border: 3px solid #73AD21;
 }
+
+.modal-title{
+    color: #000000;
+}
