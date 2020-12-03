@@ -80,7 +80,7 @@
 
 
         $Query = "
-        SELECT LogonName, Hashedpassword
+        SELECT PersonID, LogonName, Hashedpassword
         FROM people
         WHERE LogonName = ?";
 
@@ -95,7 +95,8 @@
         $array = $Result["0"];
         $Hashedpassword = $array["Hashedpassword"];
         if(password_verify($wachtwoord, $Hashedpassword)) {
-            echo '<script>alert("Succesvol geregistreerd je wordt met 5 seconden doorverwezen naar de login pagina")</script>';
+            echo '<script>alert("Succesvol ingelogd je wordt met 5 seconden doorverwezen naar de login pagina")</script>';
+            $_SESSION['personId'] = $array["PersonID"];
         } else {
             echo '<script>alert("Fout!")</script>';
         }
