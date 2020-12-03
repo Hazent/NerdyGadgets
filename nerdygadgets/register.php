@@ -104,18 +104,22 @@
         $phonenumber = $_POST["phonenumber"];
         $faxnumber = $_POST["faxnumber"];
         $emailaddress = $_POST["emailaddress"];
+        $extra = $_POST["fullname"];
+
         $number = 1;
         $issalesperson = 0;
         $ispermittedtologon = 1;
         $isemployee = 0;
         $issytemuser = 1;
         $hashedpassword = password_hash($password, PASSWORD_BCRYPT);
+        $zero = 0;
 
-        $query = "INSERT INTO people (FullName, PreferredName, LogonName, HashedPassword, PhoneNumber, FaxNumber, EmailAddress, LastEditedBy, IsSalesPerson, IsEmployee, IsPermittedToLogon, IsSystemUser )
-values (?,?,?,?,?,?,?,?,?,?,?,?)";
+
+        $query = "INSERT INTO people (FullName, PreferredName, SearchName, LogonName, HashedPassword, PhoneNumber, FaxNumber, EmailAddress, LastEditedBy, IsSalesPerson, IsEmployee, IsPermittedToLogon, IsSystemUser , IsExternalLogonProvider)
+VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         $Statement = mysqli_prepare($Connection, $query);
-        mysqli_stmt_bind_param($Statement, "ssssiisiiiii", $fullname, $firstname, $username, $hashedpassword, $phonenumber, $faxnumber, $emailaddress, $number, $issalesperson, $isemployee, $ispermittedtologon, $issytemuser);
+        mysqli_stmt_bind_param($Statement,"ssssssssiiiiii", $fullname, $fullname, $fullname, $username, $hashedpassword, $phonenumber, $faxnumber, $emailaddress,$number,  $issalesperson, $isemployee, $ispermittedtologon, $issytemuser, $zero);
         mysqli_stmt_execute($Statement);
         echo '<script>alert("Succesvol geregistreerd je wordt met 5 seconden doorverwezen naar de login pagina")</script>';
         sleep(5);
