@@ -19,7 +19,7 @@ require "connect.php";
     </style>
     <meta charset="ISO-8859-1">
     <title>NerdyGadgets</title>
-    <link rel="stylesheet" href="Public/CSS/Style.css?v=1" type="text/css">
+    <link rel="stylesheet" href="Public/CSS/Style.css?v=2" type="text/css">
     <link rel="stylesheet" href="Public/CSS/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="Public/CSS/nha3fuq.css">
     <link rel="apple-touch-icon" sizes="57x57" href="Public/Favicon/apple-icon-57x57.png">
@@ -61,6 +61,16 @@ require "connect.php";
                 mysqli_stmt_execute($Statement);
                 $HeaderStockGroups = mysqli_stmt_get_result($Statement);
 
+                $user = array();
+                    if (isset($_SESSION["userId"])){
+                        $query2 = "SELECT IsEmployee
+                        FROM people
+                        WHERE PersonID = ".$_SESSION['userId'];
+
+                        $result = mysqli_query($Connection, $query2);
+                        $user = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                    }
+
                 foreach ($HeaderStockGroups as $HeaderStockGroup) {
                     ?>
                     <li>
@@ -74,8 +84,15 @@ require "connect.php";
                     <a href="categories.php" class="HrefDecoration">Alle categorieën</a>
                 </li>
                 <li>
-                    <a href="contact.php" class="HrefDecoration">contact</a>
+                    <a href="contact.php" class="HrefDecoration">Contact</a>
                 </li>
+                <?php if(isset($_SESSION['userId'])){
+                    if($user['IsEmployee'] == 1){?>
+                    }
+                <li>
+                    <a href="contact-admin.php" class="HrefDecoration">Contact-admin</a>
+                </li>
+                <?php } } ?>
             </ul>
         </div>
         <ul id="ul-class-navigation">

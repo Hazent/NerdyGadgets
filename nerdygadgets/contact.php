@@ -28,12 +28,13 @@ foreach($contacts as $contact){
     <div class="col-11">
         <div class="Textcontact">
             <div class="TextPrice">
-            telefoonnummer: <?php print $phone;?>
+            Phone: <?php print $phone;?>
             <br>
-            email: <?php print $email;?>
+            Addres: <?php print $adres;?>
             <br>
-            addres: <?php print $adres;?>
+            Email: <?php print $email;?>
             <br>
+
             </div>
         </div>
     </div>
