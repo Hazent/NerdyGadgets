@@ -20,26 +20,54 @@ if (isset($_GET["submit"])) {
         }
     }
 }
+foreach ($_SESSION["shopping_cart"] as $keys => $values) {
+    $Query = "
+                    SELECT  StockItemID, ImagePath
+                    FROM stockitemimages";
+    $Statement = mysqli_prepare($Connection, $Query);
+    mysqli_stmt_execute($Statement);
+    $Images = mysqli_stmt_get_result($Statement);
+    $Images = mysqli_fetch_all($Images, MYSQLI_ASSOC);
+}
 ?>
+<?php if (!empty($_SESSION["shopping_cart"])) { ?>
 <div class="IndexStyle">
     <table class="BorderWinkelmand">
         <tr>
-            <th width="25%">Picture</th>
-            <th width="35%">Item Name</th>
+            <th width="25%">Foto</th>
+            <th width="35%">Product</th>
             <th width="15%">Levertijd (dagen)</th>
-            <th width="5%">Quantity</th>
-            <th width="10%">Price</th>
-            <th width="20%">Total</th>
-            <th width="10%">Remove</th>
-            <th width="10%">Change</th>
+            <th width="5%">Aantal</th>
+            <th width="10%">Prijs</th>
+            <th width="20%">Totaal</th>
+            <th width="10%">Verwijder</th>
+            <th width="10%">Aanpassen</th>
         </tr>
+<?php } ?>
         <?php
         if (!empty($_SESSION["shopping_cart"])) {
             $total = 0;
             foreach ($_SESSION["shopping_cart"] as $keys => $values) {
         ?>
                 <tr>
-                    <td>Picture</td>
+                    <td
+                            <?php
+                            foreach ($Images as $regel => $data) {
+                                if (isset($Images)) {
+                                    if ($data["StockItemID"] == $values["item_id"]) {
+                                    ?>
+                                        <div id="ImageFrame"
+                                            style="background-image: url('Public/StockItemIMG/<?php print $data["ImagePath"]; ?>'); background-size: 300px; background-repeat: no-repeat; background-position: center;"></div>
+                                    <?php
+                                    }
+                                } else {
+                                ?>
+                                    <div id="ImageFrame"
+                                        <?php print("<img src='NoImage.png'>"); ?></div>
+                                <?php }
+                                }
+                                ?>
+                    </td>
                     <td><?php echo $values["item_name"]; ?></td>
                     <td><?php echo rand(1,7) ?></td>
                     <td><?php echo $values["item_count"]; ?></td>
@@ -48,42 +76,45 @@ if (isset($_GET["submit"])) {
                     <td><a class="DeleteKnop" href="winkelmand.php?action=delete&id=<?php echo $values['item_id'] ?>">Delete</a></td>
                     <td>
                         <form method="get" name="change">
-                            <input type="hidden" name="hidden_id" value="<?php echo $values["item_id"]; ?>">
-                            <select name="number">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                            </select>
+                            <input id="id_form-0-quantity" min="0" max="100" name="number" value="<?php print($values['item_count']);?>" type="number">
+                            <input type="hidden" name="hidden_id" value="<?php print($values['item_id']);?>">
                             <input type="submit" name="submit" value="Change">
                         </form>
                     </td>
                 </tr>
         <?php
-                $total = $total + ($values["item_price"] * $values["item_count"]);
+                $verzendkosten = 5.65;
+                $total = $total + ($values["item_price"] * $values["item_count"] + $verzendkosten);
             }
+                $subtotaal = ($total - $verzendkosten);
         } else {
             $total = 0;
         }
         ?>
     </table>
+    <?php if (!empty($_SESSION["shopping_cart"])) { ?>
     <table class="total_table">
         <td>
             <br>
-            Verzendkosten: € 5,65 
+            <?php
+            print ("subtotaal: € " . number_format($subtotaal, 2) . " <br>");
+            print ("Verzendkosten: € $verzendkosten <br>");
+            ?>
+            ---------------------------------------
             <br> 
-            Total Price: € <?php echo number_format($total, 2); ?> 
+            <strong>Totaal Prijs: € <?php echo number_format($total, 2); ?> </strong>
             <br>
             <br>
             <a class="btn btn-primary btn-lg active" href="checkout.php">Afrekenen</a>
         </td>
     </table>
+    <?php } ?>
+    <div class="WinkelMandLeeg">
+        <?php if (empty($_SESSION["shopping_cart"])) {
+        print ("Winkelmand is leeg, <a href=browse.php>voeg nieuwe producten toe</a>");
+        }
+        ?>
+    </div>
 </div>
 <?php
 include __DIR__ . "/footer.php";
