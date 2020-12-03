@@ -6,7 +6,6 @@ include __DIR__ . "/header.php";
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script>
     $(document).ready(function(){
-        setTimeout(50000);
         $("#myModal").modal('show');
     });
 </script>
@@ -29,10 +28,10 @@ include __DIR__ . "/header.php";
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button class="button" class="close" aria-hidden="true">close</button>
-                <h4 class="modal-title">Register for a 50% DISCOUNT</h4>
+                <button class="button" class="close" aria-hidden="true" style="color: #000000;">close</button>
+                <h4 class="modal-title" style="color: #000000;">Register for a 50% DISCOUNT</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="color: #000000;">
                 <p>Click here to register!</p>
                 <a href="register.php">Register</a>
             </div>
