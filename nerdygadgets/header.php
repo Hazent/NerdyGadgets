@@ -84,9 +84,11 @@ require "connect.php";
                 &ensp;|&ensp;
                 <a href="browse.php" class="HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i> Zoeken </a>
                 &ensp;|&ensp;
+                <a href="login.php" class="HrefDecoration"><i type="submit" ></i> Login</a>
+                &ensp;|&ensp;
                 <a href="winkelmand.php" class="HrefDecoration"><i type="submit" ></i> Winkelmand</a>
                 &ensp;|&ensp;
-                <a href="login.php" class="HrefDecoration"><i type="submit" ></i> Login</a>
+                <a href="Wenslijst.php" class="HrefDecoration"><i type="submit" ></i> <strong>♥</strong></a>
             </li>
         </ul>
     </div>

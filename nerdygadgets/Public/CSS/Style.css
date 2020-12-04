@@ -496,3 +496,9 @@ ul#ul-class-price li {
      left: 80%;
      border: 3px solid #73AD21;
 }
+.WinkelMandLeeg{
+    text-aling: right;
+    width: 30%;
+    font-size: 20px;
+    position: center;
+}

@@ -4,7 +4,7 @@ mysqli_set_charset($Connection, 'latin1');
 include __DIR__ . "/header.php";
 
 $Query = " 
-           SELECT SI.StockItemID, 
+           SELECT SI.StockItemID,
             (RecommendedRetailPrice*(1+(TaxRate/100))) AS SellPrice, 
             StockItemName,
             CONCAT('Voorraad: ',QuantityOnHand)AS QuantityOnHand,
@@ -43,7 +43,36 @@ $R = mysqli_fetch_all($R, MYSQLI_ASSOC);
 if ($R) {
     $Images = $R;
 }
-
+if(isset($_POST["wenslijst"])){
+    if(isset($_SESSION["wenslijst"])){
+        $item_array_id2 = array_column($_SESSION["wenslijst"], "item_id");
+        if(!in_array($Result["StockItemID"], $item_array_id2)){
+            $count2 = count($_SESSION["wenslijst"]);
+            $item_array2 = array(
+                'item_id' => $Result['StockItemID'],
+                //'item_picture' => $Images[0],
+                'item_name' => $Result['StockItemName'],
+                'item_price' => $_POST['hiddenPrice'],
+                'item_count' => $_POST['count']
+            );
+            $_SESSION["wenslijst"][$count2] = $item_array2;
+            echo '<script>alert("Product Toegevoegd")</script>';
+        }else{
+            echo '<script>alert("Item Already Added")</script>';
+            echo '<script>window.location="Wenslijst.php"</script>';
+        }
+    } else{
+        $item_array2 = array(
+            'item_id' => $Result["StockItemID"],
+            //'item_picture' => $Images[0],
+            'item_name' => $Result['StockItemName'],
+            'item_price' => $_POST['hiddenPrice'],
+            'item_count' => $_POST['count']
+        );
+        $_SESSION['wenslijst'][0] = $item_array2;
+        echo '<script>alert("Product Toegevoegd")</script>';
+    }
+}
 if(isset($_POST["toevoegen"])){
     if(isset($_SESSION["shopping_cart"])){
         $item_array_id = array_column($_SESSION["shopping_cart"], "item_id");
@@ -51,7 +80,7 @@ if(isset($_POST["toevoegen"])){
             $count = count($_SESSION["shopping_cart"]);
             $item_array = array(
                 'item_id' => $Result['StockItemID'],
-                //'item_picture' => $Images[0],
+//                'item_picture' => $Image['ImagePath'],
                 'item_name' => $Result['StockItemName'],
                 'item_price' => $_POST['hiddenPrice'],
                 'item_count' => $_POST['count']
@@ -59,13 +88,13 @@ if(isset($_POST["toevoegen"])){
             $_SESSION["shopping_cart"][$count] = $item_array;
             echo '<script>alert("Product Toegevoegd")</script>';
         }else{
-            echo '<script>alert("Item Already Added")</script>';
+            echo '<script>alert("Product is al toegevoegd")</script>';
             echo '<script>window.location="winkelmand.php"</script>';
         }
     } else{
         $item_array = array(
                 'item_id' => $Result["StockItemID"],
-                //'item_picture' => $Images[0],
+//                'item_picture' => $Image['ImagePath'],
                 'item_name' => $Result['StockItemName'],
                 'item_price' => $_POST['hiddenPrice'],
                 'item_count' => $_POST['count']
@@ -167,6 +196,7 @@ if(isset($_POST["toevoegen"])){
                             <input type="hidden" name="hiddenName" value="<?php print $Result['StockItemName'];?>">
                             <input type="hidden" name="hiddenPrice" value="<?php print $Result['SellPrice'];?>">
                             <input class="ToevoegenKnop" type="submit" name="toevoegen" value="Toevoegen aan Winkelmand">
+                            <input class="ToevoegenKnop" type="submit" name="wenslijst" value="Toevoegen aan Wenslijst">
                         </form>
                     </div>
                 </div>
