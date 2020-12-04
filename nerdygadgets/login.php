@@ -44,35 +44,35 @@
 </head>
 <body>
 <fieldset>
-    <form method="post" action="login.php">
-        <div class="middle">
-            <div class="left"> <h1><strong>Inloggen</strong></h1> </div> <br> <br> <br>
-            <div class="login">
-                <p>
-                    <input type="text" placeholder="Gebruikersnaam*" class="text" name="naam" required>
-                    <input type="password" placeholder="Wachtwoord*" class="text" name="wachtwoord" id="myInput" required>
+<form method="post" action="login.php">
+    <div class="middle">
+        <div class="left"> <h1><strong>Inloggen</strong></h1> </div> <br> <br> <br>
+        <div class="login">
+            <p>
+                <input type="text" placeholder="Gebruikersnaam*" class="text" name="naam" required>
+                <input type="password" placeholder="Wachtwoord*" class="text" name="wachtwoord" id="myInput" required>
 
                 <div class="left">
-                    <input type="checkbox" class="small" onclick="myFunction()"> Wachtwoord tonen<br><br>
+                <input type="checkbox" class="small" onclick="myFunction()"> Wachtwoord tonen<br><br>
                 </div>
                 <br>
                 <input type="submit" value="Inloggen"><br>
-                </p>
+            </p>
                 Nog geen account? <a href=register.php>Registreer</a> <br>
-                </p>
-            </div>
+            </p>
         </div>
-        <script>
-            function myFunction() {
-                var x = document.getElementById("myInput");
-                if (x.type === "password") {
-                    x.type = "text";
-                } else {
-                    x.type = "password";
-                }
+    </div>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myInput");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
             }
-        </script>
-    </form>
+        }
+    </script>
+</form>
     <?php
     if (!empty($_POST["wachtwoord"]) && !empty($_POST["naam"])) {
         $wachtwoord = $_POST["wachtwoord"];
@@ -81,11 +81,7 @@
 
 
         $Query = "
-<<<<<<< HEAD
         SELECT LogonName
-=======
-        SELECT PersonID, LogonName, Hashedpassword
->>>>>>> 7a33dc3aeda5d6f6c879d902ffe6a09e5c4c2f2b
         FROM people
         WHERE LogonName = ?
         AND HashedPassword = ?";
@@ -98,25 +94,12 @@
         $Result = mysqli_fetch_all($Result, MYSQLI_ASSOC);
 
 
-<<<<<<< HEAD
         if (count($Result) == 1) {
             print "succes";
-=======
-        $array = $Result["0"];
-        $Hashedpassword = $array["Hashedpassword"];
-        if(password_verify($wachtwoord, $Hashedpassword)) {
-            echo '<script>alert("Succesvol ingelogd je wordt met 5 seconden doorverwezen naar de winkel pagina")</script>';
-            $_SESSION['personId'] = $array["PersonID"];
-<<<<<<< HEAD
->>>>>>> 7a33dc3aeda5d6f6c879d902ffe6a09e5c4c2f2b
-=======
-            sleep(5);
-            echo '<script>window.location="index.php"</script>';
->>>>>>> dcbdf310764c207ef512a0344aec008940424fc0
         } else {
             print "Onjuiste gebruikersnaam en/of wachtwoord";
         }
     }
-    ?>
+?>
 </body>
 </html>
