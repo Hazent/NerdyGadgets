@@ -100,7 +100,7 @@
             sleep(5);
             echo '<script>window.location="index.php"</script>';
         } else {
-            echo '<script>alert("Fout!")</script>';
+            echo '<script>alert("Wachtwoord en gebruikersnaam komen niet overeen")</script>';
         }
     }
     ?>
