@@ -105,9 +105,14 @@
         $array = $Result["0"];
         $Hashedpassword = $array["Hashedpassword"];
         if(password_verify($wachtwoord, $Hashedpassword)) {
-            echo '<script>alert("Succesvol ingelogd je wordt met 5 seconden doorverwezen naar de login pagina")</script>';
+            echo '<script>alert("Succesvol ingelogd je wordt met 5 seconden doorverwezen naar de winkel pagina")</script>';
             $_SESSION['personId'] = $array["PersonID"];
+<<<<<<< HEAD
 >>>>>>> 7a33dc3aeda5d6f6c879d902ffe6a09e5c4c2f2b
+=======
+            sleep(5);
+            echo '<script>window.location="index.php"</script>';
+>>>>>>> dcbdf310764c207ef512a0344aec008940424fc0
         } else {
             print "Onjuiste gebruikersnaam en/of wachtwoord";
         }
