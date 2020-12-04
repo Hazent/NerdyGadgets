@@ -198,6 +198,7 @@ if(isset($_POST["toevoegen"])){
                             <input class="ToevoegenKnop" type="submit" name="toevoegen" value="Toevoegen aan Winkelmand">
                             <input class="ToevoegenKnop" type="submit" name="wenslijst" value="Toevoegen aan Wenslijst">
                         </form>
+                        <?php $rand = rand(10, 30); print $rand?> people are watching this product!
                     </div>
                 </div>
             </div>
@@ -206,6 +207,7 @@ if(isset($_POST["toevoegen"])){
         <div id="StockItemDescription">
             <h3>Artikel beschrijving</h3>
             <p><?php print $Result['SearchDetails']; ?></p>
+            <h5>Order before 6:00 PM and get your order TOMORROW!</h5>
         </div>
         <div id="StockItemSpecifications">
             <h3>Artikel specificaties</h3>

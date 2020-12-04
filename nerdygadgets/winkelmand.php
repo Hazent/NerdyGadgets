@@ -17,6 +17,7 @@ if (isset($_GET["submit"])) {
     foreach ($_SESSION["shopping_cart"] as $keys => $values) {
         if ($values["item_id"] == $_GET["hidden_id"]) {
             $_SESSION['shopping_cart'][$keys]["item_count"] = $count;
+            echo "<script>window.location='winkelmand.php'</script>";
         }
     }
 }
