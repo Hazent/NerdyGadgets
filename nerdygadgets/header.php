@@ -90,15 +90,10 @@ require "connect.php";
                 <a href="login.php" class="HrefDecoration"><i type="submit" ></i> Login</a>
                 &ensp;|&ensp;
                 <a href="winkelmand.php" class="HrefDecoration"><i type="submit" ></i> Winkelmand</a>
-<<<<<<< HEAD
-                &ensp;|&ensp;
-                <a href="Wenslijst.php" class="HrefDecoration"><i type="submit" ></i> <strong>♥</strong></a>
-=======
                 <?php if (empty($_SESSION["personId"])) {
                     echo "&ensp;|&ensp;";
                     echo ("<a href=" ."login.php" . " " . "class=" . "HrefDecoration" . "><i type=" . "submit" . "></i>Login</a>");
                 }?>
->>>>>>> dcbdf310764c207ef512a0344aec008940424fc0
             </li>
         </ul>
     </div>
