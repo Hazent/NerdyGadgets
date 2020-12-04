@@ -85,15 +85,12 @@ require "connect.php";
                 </li>
                 <li>
                     <a href="contact.php" class="HrefDecoration">Contact</a>
-<<<<<<< HEAD
-=======
                 </li>
                 <?php if(isset($_SESSION['userId'])){
                     if($user['IsEmployee'] == 1){?>
                     }
                 <li>
                     <a href="contact-admin.php" class="HrefDecoration">Contact-admin</a>
->>>>>>> 360e9f6d8c29adeadf02161b79597e18d98a5c71
                 </li>
                 <?php } } ?>
             </ul>
