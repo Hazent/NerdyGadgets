@@ -4,58 +4,75 @@ include __DIR__ . "/header.php";
 //JOIN orderlines ON orders.OrderID = orderlines.OrderID
 $Query = "
 SELECT * FROM orders
-JOIN orderlines ON orders.OrderID = orderlines.OrderID
-WHERE `orders`.`CustomerID` = 1060";
+WHERE `orders`.`CustomerID` = 1060
+ORDER BY OrderDate DESC";
 $Statement = mysqli_prepare($Connection, $Query);
 mysqli_stmt_execute($Statement);
 $Result = mysqli_stmt_get_result($Statement);
-$rows = mysqli_fetch_all($Result, MYSQLI_ASSOC);
+$orders = mysqli_fetch_all($Result, MYSQLI_ASSOC);
 
 ?>
 <div class="IndexStyle" style="overflow: auto;">
     <div class="col-11">
-    <table class="table table-striped" style="color: white !important;">
-    <thead>
-
-      
-      <?php
-
-
-
-
-                echo "<tr>";
-                foreach($rows[0] as $key => $value){
-                    echo "<th scope='col'>".$key."</th>";
-                }
-                    
-                echo "</tr> ";
-            
-
-
-        ?>
-
-  </thead>
-  <tbody>
-
-  
 
         <?php
 
+        foreach ($orders as $order) {
+            $total = 0;
+            $Query = "
+                SELECT * FROM orderlines
+                WHERE OrderID = " . $order['OrderID'];
+            $Statement = mysqli_prepare($Connection, $Query);
+            mysqli_stmt_execute($Statement);
+            $Result = mysqli_stmt_get_result($Statement);
+            $orderlines = mysqli_fetch_all($Result, MYSQLI_ASSOC);
+
+            echo $order['OrderDate'].'
+            <table class="table table-striped" style="color: white !important;">
+                <thead>
+                    <th >Aantal</th>
+                    <th >Product</th>
+                    <th >Prijs</th>
+
+                </thead>
+                <tbody>';
 
 
-            foreach ($rows as $row) {
+
+
+
+
+
+            foreach ($orderlines as $row) {
+                $total = $total + $row["Quantity"]*$row["UnitPrice"];
                 echo "<tr>";
-                foreach($row as $key => $value){
-                    echo "<td>".$value."</td>";
-                }
-                    
+                
+                echo "<td>" . $row["Quantity"] . "x</td>";
+                echo "<td>" . $row["Description"] . "</td>";
+                echo "<td>€" . $row["Quantity"]*$row["UnitPrice"] . "</td>";
+
                 echo "</tr> ";
             }
 
+            echo "<tr>";
+            echo "<td ></td>";
+            echo "<td ></td>";
+
+            echo "<td >€" . $total . "</td>";
+
+            echo "</tr> ";
+            echo '
+            </tbody>
+        </table>
+        <br/>
+        <br/>
+
+        ';
+        }
+
         ?>
-  </tbody>
-</table>
-       
+
+
 
     </div>
 </div>
