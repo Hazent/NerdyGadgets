@@ -61,6 +61,16 @@ require "connect.php";
                 mysqli_stmt_execute($Statement);
                 $HeaderStockGroups = mysqli_stmt_get_result($Statement);
 
+                $user = array();
+                    if (isset($_SESSION["userId"])){
+                        $query2 = "SELECT IsEmployee
+                        FROM people
+                        WHERE PersonID = ".$_SESSION['userId'];
+
+                        $result = mysqli_query($Connection, $query2);
+                        $user = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                    }
+
                 foreach ($HeaderStockGroups as $HeaderStockGroup) {
                     ?>
                     <li>
@@ -75,7 +85,17 @@ require "connect.php";
                 </li>
                 <li>
                     <a href="contact.php" class="HrefDecoration">Contact</a>
+<<<<<<< HEAD
+=======
                 </li>
+                <?php if(isset($_SESSION['userId'])){
+                    if($user['IsEmployee'] == 1){?>
+                    }
+                <li>
+                    <a href="contact-admin.php" class="HrefDecoration">Contact-admin</a>
+>>>>>>> 360e9f6d8c29adeadf02161b79597e18d98a5c71
+                </li>
+                <?php } } ?>
             </ul>
         </div>
         <ul id="ul-class-navigation">
