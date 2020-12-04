@@ -28,7 +28,7 @@ include __DIR__ . "/header.php";
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button class="button" class="close" aria-hidden="true" style="color: #000000;">close</button>
+                <!-- <button class="button" class="close" aria-hidden="true" style="color: #000000;">close</button> -->
                 <h4 class="modal-title" style="color: #000000;">Register for a 50% DISCOUNT</h4>
             </div>
             <div class="modal-body" style="color: #000000;">
