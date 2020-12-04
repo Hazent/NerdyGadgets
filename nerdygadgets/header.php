@@ -80,13 +80,18 @@ require "connect.php";
         </div>
         <ul id="ul-class-navigation">
             <li>
-                <a href="profile.php" class="HrefDecoration" style="margin-right: 10px"><i class="fas fa-user" style="color:#676EFF;"></i> Profiel</a>
-                &ensp;|&ensp;
+                <?php if (!empty($_SESSION["personId"])) {
+                    echo ("<a href=" . "profile.php" ." " . "class=" . "HrefDecoration" . " " .  "style=" . "margin-right:" . "10px" . " " . "><i class=" . "fas" . "fa-user" . " style=" . "color:#676EFF;" . "></i>Profiel</a>");
+                    echo "&ensp;|&ensp;";
+                }?>
+
                 <a href="browse.php" class="HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i> Zoeken </a>
                 &ensp;|&ensp;
                 <a href="winkelmand.php" class="HrefDecoration"><i type="submit" ></i> Winkelmand</a>
-                &ensp;|&ensp;
-                <a href="login.php" class="HrefDecoration"><i type="submit" ></i> Login</a>
+                <?php if (empty($_SESSION["personId"])) {
+                    echo "&ensp;|&ensp;";
+                    echo ("<a href=" ."login.php" . " " . "class=" . "HrefDecoration" . "><i type=" . "submit" . "></i>Login</a>");
+                }?>
             </li>
         </ul>
     </div>
