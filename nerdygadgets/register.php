@@ -75,6 +75,13 @@
                 <input required id="phonenumber" type="text" placeholder="Telefoonnummer" name="phonenumber"><br>
                 <input required id="faxnumber" type="text" placeholder="Faxnummer" name="faxnumber"><br>
                 <input required id="emailaddress" type="email" placeholder="voorbeeld@voorbeeld.com" name="emailaddress"><br>
+                <br>
+                <h2>Adres gegevens</h2>
+                <input required id="street" type="text" placeholder="Straatnaam" name="street"><br>
+                <input required id="housenumber" type="text" placeholder="Huisnummer" name="housenumber"><br>
+                <input required id="postalcode" type="text" placeholder="" name="postalcode"><br>
+                <input required id="postalcode" type="text" placeholder="" name="postalcode"><br>
+
                 <div class="left">
                     <input type="checkbox" class="small" onclick="myFunction()"> Wachtwoord tonen<br><br>
                 </div>
@@ -121,6 +128,21 @@ VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         $Statement = mysqli_prepare($Connection, $query);
         mysqli_stmt_bind_param($Statement,"ssssssssiiiiii", $fullname, $fullname, $fullname, $username, $hashedpassword, $phonenumber, $faxnumber, $emailaddress,$number,  $issalesperson, $isemployee, $ispermittedtologon, $issytemuser, $zero);
         mysqli_stmt_execute($Statement);
+
+        $select = "SELECT PersonID FROM people WHERE FullName = ?";
+        $selectstmt = mysqli_prepare($Connection, $select);
+        mysqli_stmt_bind_param($selectstmt, "s", $fullname, );
+        mysqli_stmt_execute($selectstmt);
+
+        $SelectResult = mysqli_stmt_get_result($Statement);
+        $SelectResult = mysqli_fetch_all($SelectResult, MYSQLI_ASSOC);
+        $selectarray = $SelectResult[0];
+        $userID = $selectarray["PersonID"];
+
+        $Query = "INSERT INTO customers (CustomerName, BillToCustomerID, CustomeraCategoryID, BuyingGroupID, PrimaryContactPersonID, AlternateContactPersonID, DeliveryMethodID, DeliveryCityID, PostalCityID, CreditLimit, AccountOpendDate, StandardDiscountPercentage, IsStatementSent, IsOnCreditHold, PaymentDays, PhoneNumber, DeliveryAddressLine1, DeliveryPostalCode, )";
+
+        $stmt = mysqli_prepare($Connection, $Query);
+        mysqli_stmt_bind_param($stmt, "sssss", $fullname, );
         echo '<script>alert("Succesvol geregistreerd je wordt met 5 seconden doorverwezen naar de login pagina")</script>';
         sleep(5);
         echo '<script>window.location="login.php"</script>';

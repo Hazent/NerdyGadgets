@@ -21,22 +21,48 @@ $email = $array["EmailAddress"];
 <html lang="nl">
 
 <head>
-    <title>Profiel</title>
+    <title>Mijn gegevens</title>
     <meta charset="UTF-8">
     <style>
+        .content {
+            position: absolute;
+            margin: auto;
+            margin-left: 40%;
+            margin-top: 2%;
+            width: 14%;
 
+            border:1px solid white;
+        }
+
+        .address {
+            position: absolute;
+            margin: auto;
+            margin-left: 40%;
+            margin-top: 13%;
+            width: 14%;
+
+
+            border:1px solid white;
+        }
     </style>
 </head>
 
 <body>
-    <div class="head">
-        <h1>Profiel van <?php print($fullname) ?></h1>
-    </div>
-    <div class="content">
-        <p>Telefoon nr: <?php print($phonenumber) ?></p>
-        <p>email: <?php print($email) ?></p>
-    </div>
+<div class="content">
+    <h1>Mijn gegevens</h1>
+    <br>
+    <label for="fullname">Naam:</label> <strong id="fullname"><?php print(" " .$fullname)?></strong>
+    <p>Tel nr: <?php print($phonenumber) ?></p>
+    <p>email: <?php print($email) ?></p>
     <a href="orders.php">bestelgeschiedenis</a>
+    <br>
+    <br>
+</div>
+<br>
+<br>
+<div class="address" >
+    <h2>Adresgegevens</h2>
+</div>
 
 </body>
 

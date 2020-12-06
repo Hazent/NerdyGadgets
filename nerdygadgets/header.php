@@ -103,14 +103,13 @@ require "connect.php";
                 }?>
 
                 <a href="browse.php" class="HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i> Zoeken </a>
-                &ensp;|&ensp;
-                <a href="login.php" class="HrefDecoration"><i type="submit" ></i> Login</a>
-                &ensp;|&ensp;
-                <a href="winkelmand.php" class="HrefDecoration"><i type="submit" ></i> Winkelmand</a>
                 <?php if (empty($_SESSION["personId"])) {
                     echo "&ensp;|&ensp;";
                     echo ("<a href=" ."login.php" . " " . "class=" . "HrefDecoration" . "><i type=" . "submit" . "></i>Login</a>");
                 }?>
+                &ensp;|&ensp;
+                <a href="winkelmand.php" class="HrefDecoration"><i type="submit" ></i> Winkelmand</a>
+
             </li>
         </ul>
     </div>
