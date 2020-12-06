@@ -80,7 +80,7 @@
                 <input required id="street" type="text" placeholder="Straatnaam" name="street"><br>
                 <input required id="housenumber" type="text" placeholder="Huisnummer" name="housenumber"><br>
                 <input required id="postalcode" type="text" placeholder="" name="postalcode"><br>
-                <input required id="postalcode" type="text" placeholder="" name="postalcode"><br>
+                <input required id="city" type="text" placeholder="Stad" name="City"><br>
 
                 <div class="left">
                     <input type="checkbox" class="small" onclick="myFunction()"> Wachtwoord tonen<br><br>
@@ -104,6 +104,7 @@
     <br><br><br>
     <?php
     if (!empty($_POST["fullname"])) {
+        // get NAW data
         $fullname = $_POST["fullname"];
         $firstname = $_POST["firstname"];
         $username = $_POST["username"];
@@ -111,8 +112,14 @@
         $phonenumber = $_POST["phonenumber"];
         $faxnumber = $_POST["faxnumber"];
         $emailaddress = $_POST["emailaddress"];
-        $extra = $_POST["fullname"];
 
+        //get delivery address data
+        $street = $_POST["street"];
+        $housenumber = $_POST["housenumber"];
+        $postalcode = $_POST["postalcode"];
+        $city = $_POST["city"];
+
+        //vars
         $number = 1;
         $issalesperson = 0;
         $ispermittedtologon = 1;
@@ -120,8 +127,14 @@
         $issytemuser = 1;
         $hashedpassword = password_hash($password, PASSWORD_BCRYPT);
         $zero = 0;
+        $seven = 7;
+        $deliverymethod = 1;
+        $creditlimit = 0.00;
+        $discount = 0.000;
+        $currentdate = mktime();
+        $line2 = $street . " " . $housenumber;
 
-
+        // insert people
         $query = "INSERT INTO people (FullName, PreferredName, SearchName, LogonName, HashedPassword, PhoneNumber, FaxNumber, EmailAddress, LastEditedBy, IsSalesPerson, IsEmployee, IsPermittedToLogon, IsSystemUser , IsExternalLogonProvider)
 VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
@@ -129,27 +142,25 @@ VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         mysqli_stmt_bind_param($Statement,"ssssssssiiiiii", $fullname, $fullname, $fullname, $username, $hashedpassword, $phonenumber, $faxnumber, $emailaddress,$number,  $issalesperson, $isemployee, $ispermittedtologon, $issytemuser, $zero);
         mysqli_stmt_execute($Statement);
 
+        // get id from custommer
         $select = "SELECT PersonID FROM people WHERE FullName = ?";
         $selectstmt = mysqli_prepare($Connection, $select);
         mysqli_stmt_bind_param($selectstmt, "s", $fullname, );
         mysqli_stmt_execute($selectstmt);
-
         $SelectResult = mysqli_stmt_get_result($Statement);
         $SelectResult = mysqli_fetch_all($SelectResult, MYSQLI_ASSOC);
         $selectarray = $SelectResult[0];
         $userID = $selectarray["PersonID"];
 
-        $Query = "INSERT INTO customers (CustomerName, BillToCustomerID, CustomeraCategoryID, BuyingGroupID, PrimaryContactPersonID, AlternateContactPersonID, DeliveryMethodID, DeliveryCityID, PostalCityID, CreditLimit, AccountOpendDate, StandardDiscountPercentage, IsStatementSent, IsOnCreditHold, PaymentDays, PhoneNumber, DeliveryAddressLine1, DeliveryPostalCode, )";
+        //insert customer
+        $Insertcustommer = "INSERT INTO customers (CustomerName, PrimaryContactPersonID, DeliveryMethodID, CreditLimit, AccountOpendDate, StandardDiscountPercentage, IsOnCreditHold, PaymentDays, PhoneNumber, DeliveryAddressLine1, DeliveryAddressLine2, DeliveryPostalCode, LastEditedBy )";
 
-        $stmt = mysqli_prepare($Connection, $Query);
-        mysqli_stmt_bind_param($stmt, "sssss", $fullname, );
-        echo '<script>alert("Succesvol geregistreerd je wordt met 5 seconden doorverwezen naar de login pagina")</script>';
-        sleep(5);
+        $stmt = mysqli_prepare($Connection, $Insertcustommer);
+        mysqli_stmt_bind_param($stmt, "", $fullname, $userID, $deliverymethod , $creditlimit, $currentdate, $discount, $zero, $seven, $phonenumber, $city, $line2, $postalcode, $number);
+        echo '<script>alert("Succesvol geregistreerd je wordt doorverwezen naar de login pagina")</script>';
+        sleep(2);
         echo '<script>window.location="login.php"</script>';
     }
-
-
-
     ?>
 </fieldset>
 </body>
