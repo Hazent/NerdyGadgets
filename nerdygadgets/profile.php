@@ -4,9 +4,9 @@ require __DIR__ . "/connect.php"; ?>
 
 $user_id = $_SESSION["personId"];
 
-$query = "SELECT * FROM people WHERE PersonId = ?";
+$selectpeople = "SELECT * FROM people WHERE PersonId = ?";
 
-$Statement = mysqli_prepare($Connection, $query);
+$Statement = mysqli_prepare($Connection, $selectpeople);
 mysqli_stmt_bind_param($Statement, "i", $user_id);
 mysqli_stmt_execute($Statement);
 $Result = mysqli_stmt_get_result($Statement);
@@ -15,6 +15,15 @@ $array = $Result[0];
 $fullname = $array["FullName"];
 $phonenumber = $array["PhoneNumber"];
 $email = $array["EmailAddress"];
+
+$selectCustomer = "SELECT * FROM Customers WHERE PrimaryContactPersonID = ?";
+$Stmnt = mysqli_prepare($Connection, $selectCustomer);
+mysqli_stmt_bind_param($Stmnt, "i", $user_id);
+mysqli_stmt_execute($Stmnt);
+$customerResult = mysqli_stmt_get_result($Stmnt);
+$custommer = mysqli_fetch_all($customerResult, MYSQLI_ASSOC);
+$customerarray = $custommer[0];
+
 
 ?>
 <!DOCTYPE html>
