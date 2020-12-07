@@ -1,5 +1,5 @@
 <?php require __DIR__ . "/header.php";
-require __DIR__ . "/connect.php";?>
+require __DIR__ . "/connect.php"; ?>
 <?php
 
 $user_id = $_SESSION["personId"];
@@ -19,14 +19,17 @@ $email = $array["EmailAddress"];
 ?>
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
     <title>Profiel</title>
     <meta charset="UTF-8">
     <style>
-        
+
     </style>
 </head>
+
 <body>
+<<<<<<< HEAD
 <div class="head">
 <h1>Profiel van <?php print($fullname) ?></h1>
 </div>
@@ -35,6 +38,17 @@ $email = $array["EmailAddress"];
 <p>email: <?php print($email) ?></p>
     <a href="orders.php">Bestelgeschiedenis</a>
  </div>
+=======
+    <div class="head">
+        <h1>Profiel van <?php print($fullname) ?></h1>
+    </div>
+    <div class="content">
+        <p>Telefoon nr: <?php print($phonenumber) ?></p>
+        <p>email: <?php print($email) ?></p>
+    </div>
+    <a href="orders.php">bestelgeschiedenis</a>
+>>>>>>> 2876c82601000d6f792d69fae34f5a2fd88de9c2
 
 </body>
+
 </html>
