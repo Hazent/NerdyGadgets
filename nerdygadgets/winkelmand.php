@@ -1,6 +1,5 @@
 <?php
 include __DIR__ . "/header.php";
-
 if (isset($_GET["action"])) {
     if ($_GET["action"] == "delete") {
         foreach ($_SESSION["shopping_cart"] as $keys => $values) {
@@ -33,6 +32,7 @@ foreach ($_SESSION["shopping_cart"] as $keys => $values) {
 ?>
 <?php if (!empty($_SESSION["shopping_cart"])) { ?>
 <div class="IndexStyle">
+    <legend>Winkelmand</legend>
     <table class="BorderWinkelmand">
         <tr>
             <th width="25%">Foto</th>
@@ -73,7 +73,13 @@ foreach ($_SESSION["shopping_cart"] as $keys => $values) {
                     <td><?php echo rand(1,7) ?></td>
                     <td><?php echo $values["item_count"]; ?></td>
                     <td>€ <?php echo number_format($values["item_price"], 2); ?></td>
-                    <td>€ <?php echo number_format($values["item_price"] * $values["item_count"], 2); ?></td>
+
+                    <td>€ <?php
+//                        if (!isset($values["item_count"])) {
+//                            $values["item_count"] = 1;
+//                        }
+                        echo number_format($values["item_price"] * $values["item_count"], 2); ?></td>
+
                     <td><a class="DeleteKnop" href="winkelmand.php?action=delete&id=<?php echo $values['item_id'] ?>">Delete</a></td>
                     <td>
                         <form method="get" name="change">
@@ -83,6 +89,7 @@ foreach ($_SESSION["shopping_cart"] as $keys => $values) {
                         </form>
                     </td>
                 </tr>
+
         <?php
                 $verzendkosten = 5.65;
                 $total = $total + ($values["item_price"] * $values["item_count"] + $verzendkosten);

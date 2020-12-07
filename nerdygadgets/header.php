@@ -19,7 +19,7 @@ require "connect.php";
     </style>
     <meta charset="ISO-8859-1">
     <title>NerdyGadgets</title>
-    <link rel="stylesheet" href="Public/CSS/Style.css?v=2" type="text/css">
+    <link rel="stylesheet" href="Public/CSS/Style.css?v=3" type="text/css">
     <link rel="stylesheet" href="Public/CSS/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="Public/CSS/nha3fuq.css">
     <link rel="apple-touch-icon" sizes="57x57" href="Public/Favicon/apple-icon-57x57.png">
@@ -103,14 +103,14 @@ require "connect.php";
                 }?>
 
                 <a href="browse.php" class="HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i> Zoeken </a>
-                &ensp;|&ensp;
-                <a href="login.php" class="HrefDecoration"><i type="submit" ></i> Login</a>
-                &ensp;|&ensp;
-                <a href="winkelmand.php" class="HrefDecoration"><i type="submit" ></i> Winkelmand</a>
                 <?php if (empty($_SESSION["personId"])) {
                     echo "&ensp;|&ensp;";
-                    echo ("<a href=" ."login.php" . " " . "class=" . "HrefDecoration" . "><i type=" . "submit" . "></i>Login</a>");
+                    echo ("<a href=" ."login.php" . " " . "class=" . "HrefDecoration" . "><i type=" . "submit" . "></i>Inloggen</a>");
                 }?>
+                &ensp;|&ensp;
+                <a href="winkelmand.php" class="HrefDecoration"><i type="submit" ></i> Winkelmand</a>
+                &ensp;|&ensp;
+                <a href="wenslijst.php" class="HrefDecoration"><i type="submit" ></i> ♥ </a>
             </li>
         </ul>
     </div>

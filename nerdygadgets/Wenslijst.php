@@ -25,7 +25,7 @@ if (isset($_GET["submit"])) {
         }
     }
 }
-foreach ($_SESSION["shopping_cart"] as $keys => $values) {
+foreach ($_SESSION["wenslijst"] as $keys => $values) {
     $Query = "
                     SELECT  StockItemID, ImagePath
                     FROM stockitemimages";
