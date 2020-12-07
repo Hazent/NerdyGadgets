@@ -26,7 +26,7 @@ $customerarray = $customer[0];
 
 $city = $customerarray["DeliveryAddressLine1"];
 $address = $customerarray["DeliveryAddressLine2"];
-$postalcode = $customerarray["DeliveryPostalCode"]
+$postalcode = $customerarray["DeliveryPostalCode"];
 
 ?>
 <!DOCTYPE html>
@@ -39,20 +39,10 @@ $postalcode = $customerarray["DeliveryPostalCode"]
         .content {
             position: absolute;
             margin: auto;
+
             margin-left: 40%;
             margin-top: 2%;
             width: 14%;
-
-            border:1px solid white;
-        }
-
-        .address {
-            position: absolute;
-            margin: auto;
-            margin-left: 40%;
-            margin-top: 13%;
-            width: 14%;
-
 
             border:1px solid white;
         }
@@ -72,7 +62,7 @@ $postalcode = $customerarray["DeliveryPostalCode"]
     <h2>Adresgegevens</h2>
     <p>straat: <?php print($address); ?></p>
     <p>Stad: <?php print($city); ?></p>
-    <p>postcode</p>
+    <p>postcode: <?php print($postalcode)?></p>
 
 </div>
 <br>

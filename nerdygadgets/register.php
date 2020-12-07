@@ -1,6 +1,6 @@
 <?php require __DIR__ . "/header.php"; ?>
 <!DOCTYPE html>
-<html>
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <style>
@@ -153,11 +153,11 @@ VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         $userID = $selectarray["PersonID"];
 
         //insert customer
-        $Insertcustommer = "INSERT INTO customers (CustomerName, PrimaryContactPersonID,CustomerCategoryID, DeliveryMethodID, DeliveryCityID,PostalCityID, CreditLimit, AccountOpenedDate, StandardDiscountPercentage, IsOnCreditHold, PaymentDays, PhoneNumber, DeliveryAddressLine1, DeliveryAddressLine2, DeliveryPostalCode, LastEditedBy )
-                            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $Insertcustommer = "INSERT INTO customers (CustomerName, BillToCustomerID, CustomerCategoryID, BuyingGroupID, PrimaryContactPersonID, AlternateContactPersonID, DeliveryMethodID, DeliveryCityID,PostalCityID, CreditLimit, AccountOpenedDate, StandardDiscountPercentage, IsOnCreditHold, PaymentDays, PhoneNumber, DeliveryAddressLine1, DeliveryAddressLine2, DeliveryPostalCode, LastEditedBy )
+                            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         $stmt = mysqli_prepare($Connection, $Insertcustommer);
-        mysqli_stmt_bind_param($stmt, "siiiiiisiiiisssi", $fullname, $userID, $number, $deliverymethod, $number, $number, $creditlimit, $currentdate, $discount, $zero, $seven, $phonenumber, $city, $line2, $postalcode, $number);
+        mysqli_stmt_bind_param($stmt, "siiiiiiiiisiiiisssi", $fullname, $number, $number, $number, $userID, $userID, $deliverymethod, $number, $number, $creditlimit, $currentdate, $discount, $zero, $seven, $phonenumber, $city, $line2, $postalcode, $number);
         mysqli_stmt_execute($stmt);
         echo '<script>alert("Succesvol geregistreerd je wordt doorverwezen naar de login pagina")</script>';
         sleep(2);
