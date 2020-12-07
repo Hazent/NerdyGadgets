@@ -1,3 +1,5 @@
+<title>Nerdygadgets - Contact</title>
+
 <?php
 include __DIR__ . "/header.php";
 
@@ -28,11 +30,11 @@ foreach($contacts as $contact){
     <div class="col-11">
         <div class="Textcontact">
             <div class="TextPrice">
-            Phone: <?php print $phone;?>
+            Telefoonnummer: <?php print $phone;?>
             <br>
-            Addres: <?php print $adres;?>
+            Adres: <?php print $adres;?>
             <br>
-            Email: <?php print $email;?>
+            E-mail: <?php print $email;?>
             <br>
 
             </div>

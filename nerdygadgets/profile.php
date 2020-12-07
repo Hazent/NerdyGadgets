@@ -1,3 +1,5 @@
+<title>Nerdygadgets - Profiel</title>
+
 <?php require __DIR__ . "/header.php";
 require __DIR__ . "/connect.php"; ?>
 <?php

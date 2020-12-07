@@ -1,3 +1,5 @@
+<title>Nerdygadgets - product overzicht</title>
+
 <?php
 include __DIR__ . "/header.php";
 $SearchString = "";

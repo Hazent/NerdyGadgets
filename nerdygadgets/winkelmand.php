@@ -1,6 +1,5 @@
 <?php
 include __DIR__ . "/header.php";
-
 if (isset($_GET["action"])) {
     if ($_GET["action"] == "delete") {
         foreach ($_SESSION["shopping_cart"] as $keys => $values) {
@@ -21,17 +20,18 @@ if (isset($_GET["submit"])) {
         }
     }
 }
-foreach ($_SESSION["shopping_cart"] as $keys => $values) {
-    $Query = "
+
+?>
+<?php if (!empty($_SESSION["shopping_cart"])) {
+    foreach ($_SESSION["shopping_cart"] as $keys => $values) {
+        $Query = "
                     SELECT  StockItemID, ImagePath
                     FROM stockitemimages";
-    $Statement = mysqli_prepare($Connection, $Query);
-    mysqli_stmt_execute($Statement);
-    $Images = mysqli_stmt_get_result($Statement);
-    $Images = mysqli_fetch_all($Images, MYSQLI_ASSOC);
-}
-?>
-<?php if (!empty($_SESSION["shopping_cart"])) { ?>
+        $Statement = mysqli_prepare($Connection, $Query);
+        mysqli_stmt_execute($Statement);
+        $Images = mysqli_stmt_get_result($Statement);
+        $Images = mysqli_fetch_all($Images, MYSQLI_ASSOC);
+    }?>
 <div class="IndexStyle">
     <table class="BorderWinkelmand">
         <tr>
@@ -73,16 +73,23 @@ foreach ($_SESSION["shopping_cart"] as $keys => $values) {
                     <td><?php echo rand(1,7) ?></td>
                     <td><?php echo $values["item_count"]; ?></td>
                     <td>€ <?php echo number_format($values["item_price"], 2); ?></td>
-                    <td>€ <?php echo number_format($values["item_price"] * $values["item_count"], 2); ?></td>
+
+                    <td>€ <?php
+//                        if (!isset($values["item_count"])) {
+//                            $values["item_count"] = 1;
+//                        }
+                        echo number_format($values["item_price"] * $values["item_count"], 2); ?></td>
+
                     <td><a class="DeleteKnop" href="winkelmand.php?action=delete&id=<?php echo $values['item_id'] ?>">Delete</a></td>
                     <td>
-                        <form method="get" name="change">
+                        <form method="get" name="Change">
                             <input id="id_form-0-quantity" min="0" max="100" name="number" value="<?php print($values['item_count']);?>" type="number">
                             <input type="hidden" name="hidden_id" value="<?php print($values['item_id']);?>">
-                            <input type="submit" name="submit" value="Change">
+                            <input type="submit" name="submit" value="Aantal aanpassen">
                         </form>
                     </td>
                 </tr>
+
         <?php
                 $verzendkosten = 5.65;
                 $total = $total + ($values["item_price"] * $values["item_count"] + $verzendkosten);
@@ -98,7 +105,7 @@ foreach ($_SESSION["shopping_cart"] as $keys => $values) {
         <td>
             <br>
             <?php
-            print ("subtotaal: € " . number_format($subtotaal, 2) . " <br>");
+            print ("Subtotaal: € " . number_format($subtotaal, 2) . " <br>");
             print ("Verzendkosten: € $verzendkosten <br>");
             ?>
             ---------------------------------------

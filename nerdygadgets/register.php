@@ -1,3 +1,5 @@
+<title>Nerdygadgets - Registreren</title>
+
 <?php require __DIR__ . "/header.php"; ?>
 <!DOCTYPE html>
 <html lang="nl">

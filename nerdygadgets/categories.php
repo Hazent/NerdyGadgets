@@ -1,3 +1,4 @@
+<title>Nerdygadgets - Categorieën</title>
 <?php
 
 include __DIR__ . "/header.php";

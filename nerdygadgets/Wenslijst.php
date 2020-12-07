@@ -25,25 +25,27 @@ if (isset($_GET["submit"])) {
         }
     }
 }
-foreach ($_SESSION["shopping_cart"] as $keys => $values) {
-    $Query = "
-                    SELECT  StockItemID, ImagePath
-                    FROM stockitemimages";
-    $Statement = mysqli_prepare($Connection, $Query);
-    mysqli_stmt_execute($Statement);
-    $Images = mysqli_stmt_get_result($Statement);
-    $Images = mysqli_fetch_all($Images, MYSQLI_ASSOC);
-}
+
 ?>
 <?php if (!empty($_SESSION["wenslijst"])) {
-?>
+    foreach ($_SESSION["wenslijst"] as $keys => $values) {
+        $Query = "
+                    SELECT  StockItemID, ImagePath
+                    FROM stockitemimages";
+        $Statement = mysqli_prepare($Connection, $Query);
+        mysqli_stmt_execute($Statement);
+        $Images = mysqli_stmt_get_result($Statement);
+        $Images = mysqli_fetch_all($Images, MYSQLI_ASSOC);
+    }
+
+    ?>
     <div class="IndexStyle">
         <table class="BorderWinkelmand">
             <tr>
-                <th width="25%">Picture</th>
-                <th width="35%">Item Name</th>
-                <th width="10%">Price</th>
-                <th width="10%">Remove</th>
+                <th width="25%">Foto</th>
+                <th width="35%">Product</th>
+                <th width="10%">Prijs</th>
+                <th width="10%">Verwijder</th>
 
             </tr>
             <?php }
