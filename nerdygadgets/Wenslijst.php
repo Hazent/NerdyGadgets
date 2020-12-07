@@ -1,3 +1,5 @@
+<title>Nerdygadgets - Wenslijst</title>
+
 <?php
 
 include __DIR__ . "/header.php";

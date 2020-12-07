@@ -1,3 +1,5 @@
+<title>NerdyGadgets - Bestelgeschiedenis</title>
+
 <?php
 include __DIR__ . "/header.php";
 
@@ -14,6 +16,7 @@ $orders = mysqli_fetch_all($Result, MYSQLI_ASSOC);
 ?>
 <div class="IndexStyle" style="overflow: auto;">
     <div class="col-11">
+        Bestelgeschiedenis<br><br>
 
         <?php
 

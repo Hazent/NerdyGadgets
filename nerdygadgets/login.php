@@ -1,3 +1,5 @@
+<title>Nerdygadgets - Inloggen</title>
+
 <?php include __DIR__ . "/header.php";?>
 <!DOCTYPE html>
 <html>

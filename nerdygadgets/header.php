@@ -19,7 +19,7 @@ require "connect.php";
     </style>
     <meta charset="ISO-8859-1">
     <title>NerdyGadgets</title>
-    <link rel="stylesheet" href="Public/CSS/Style.css?v=2" type="text/css">
+    <link rel="stylesheet" href="Public/CSS/Style.css?v=7" type="text/css">
     <link rel="stylesheet" href="Public/CSS/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="Public/CSS/nha3fuq.css">
     <link rel="apple-touch-icon" sizes="57x57" href="Public/Favicon/apple-icon-57x57.png">
@@ -72,14 +72,7 @@ require "connect.php";
                         $user = $array[0];
                     }
 
-                foreach ($HeaderStockGroups as $HeaderStockGroup) {
-                    ?>
-                    <li>
-                        <a href="browse.php?category_id=<?php print $HeaderStockGroup['StockGroupID']; ?>"
-                           class="HrefDecoration"><?php print $HeaderStockGroup['StockGroupName']; ?></a>
-                    </li>
-                    <?php
-                }
+
                 ?>
                 <li>
                     <a href="categories.php" class="HrefDecoration">Alle categorieën</a>
@@ -91,7 +84,7 @@ require "connect.php";
                     if($user['IsEmployee'] == 1){?>
 
                 <li>
-                    <a href="contact-admin.php" class="HrefDecoration">Contact-admin</a>
+                    <a href="contact-admin.php" class="HrefDecoration">Contact-aanpassen</a>
                 </li>
                 <?php } } ?>
             </ul>

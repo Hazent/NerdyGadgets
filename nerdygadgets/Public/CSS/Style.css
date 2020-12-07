@@ -474,12 +474,15 @@ ul#ul-class-price li {
     color: #fff;
 }
 .ToevoegenKnop {
-    background: #676EFF;
+    background: darkblue;
     font-weight: bold;
     font-size: 13px;
-    color: white;
-}
+    color: orangered;
 
+
+
+
+}
 .DeleteKnop{
      display: block;
      color: #b21f2d;
@@ -512,4 +515,32 @@ ul#ul-class-price li {
     width: 100%;
     margin: 0 auto;
     text-align:  center;
+}
+.WenslijstKnop {
+    background: #676EFF;
+    font-weight: bold;
+    font-size: 20px;
+    color: red;
+
+}
+
+
+.h_container{
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+    display: inline;
+
+
+}
+#heart{
+    font-size: 25px;
+}
+#heart:hover{
+    color:red;
+}
+
+.rainbow{
+    background-image: linear-gradient(to left, violet, green, yellow, orange, gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

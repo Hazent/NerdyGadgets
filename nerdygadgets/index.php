@@ -1,3 +1,4 @@
+<title>Nerdygadgets - Hoofdpagina</title>
 <?php
 include __DIR__ . "/header.php";
 ?>

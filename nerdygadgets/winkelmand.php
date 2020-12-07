@@ -1,3 +1,5 @@
+<title>Nerdygadgets - Winkelmand</title>
+
 <?php
 include __DIR__ . "/header.php";
 
@@ -75,12 +77,12 @@ if (isset($_GET["submit"])) {
                     <td><?php echo $values["item_count"]; ?></td>
                     <td>€ <?php echo number_format($values["item_price"], 2); ?></td>
                     <td>€ <?php echo number_format($values["item_price"] * $values["item_count"], 2); ?></td>
-                    <td><a class="DeleteKnop" href="winkelmand.php?action=delete&id=<?php echo $values['item_id'] ?>">Delete</a></td>
+                    <td><a class="DeleteKnop" href="winkelmand.php?action=delete&id=<?php echo $values['item_id'] ?>">Verwijder</a></td>
                     <td>
-                        <form method="get" name="change">
+                        <form method="get" name="Change">
                             <input id="id_form-0-quantity" min="0" max="100" name="number" value="<?php print($values['item_count']);?>" type="number">
                             <input type="hidden" name="hidden_id" value="<?php print($values['item_id']);?>">
-                            <input type="submit" name="submit" value="Change">
+                            <input type="submit" name="submit" value="Aantal aanpassen">
                         </form>
                     </td>
                 </tr>
@@ -99,7 +101,7 @@ if (isset($_GET["submit"])) {
         <td>
             <br>
             <?php
-            print ("subtotaal: € " . number_format($subtotaal, 2) . " <br>");
+            print ("Subtotaal: € " . number_format($subtotaal, 2) . " <br>");
             print ("Verzendkosten: € $verzendkosten <br>");
             ?>
             ---------------------------------------
