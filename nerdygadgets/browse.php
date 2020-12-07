@@ -1,3 +1,5 @@
+<title>Nerdygadgets - product overzicht</title>
+
 <?php
 include __DIR__ . "/header.php";
 $SearchString = "";
@@ -203,7 +205,7 @@ if (isset($amount)) {
                 } ?>>Naam aflopend
                 </option>
             </select>
-            Bestel voor 18:00 en krijg je bestelling MORGEN binnen!
+            Order before 6:00 PM and get your order TOMORROW!
     </form>
 </div>
 </div>

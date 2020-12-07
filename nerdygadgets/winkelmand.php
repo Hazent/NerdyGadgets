@@ -20,19 +20,19 @@ if (isset($_GET["submit"])) {
         }
     }
 }
-foreach ($_SESSION["shopping_cart"] as $keys => $values) {
-    $Query = "
+
+?>
+<?php if (!empty($_SESSION["shopping_cart"])) {
+    foreach ($_SESSION["shopping_cart"] as $keys => $values) {
+        $Query = "
                     SELECT  StockItemID, ImagePath
                     FROM stockitemimages";
-    $Statement = mysqli_prepare($Connection, $Query);
-    mysqli_stmt_execute($Statement);
-    $Images = mysqli_stmt_get_result($Statement);
-    $Images = mysqli_fetch_all($Images, MYSQLI_ASSOC);
-}
-?>
-<?php if (!empty($_SESSION["shopping_cart"])) { ?>
+        $Statement = mysqli_prepare($Connection, $Query);
+        mysqli_stmt_execute($Statement);
+        $Images = mysqli_stmt_get_result($Statement);
+        $Images = mysqli_fetch_all($Images, MYSQLI_ASSOC);
+    }?>
 <div class="IndexStyle">
-    <legend>Winkelmand</legend>
     <table class="BorderWinkelmand">
         <tr>
             <th width="25%">Foto</th>
@@ -82,10 +82,10 @@ foreach ($_SESSION["shopping_cart"] as $keys => $values) {
 
                     <td><a class="DeleteKnop" href="winkelmand.php?action=delete&id=<?php echo $values['item_id'] ?>">Delete</a></td>
                     <td>
-                        <form method="get" name="change">
+                        <form method="get" name="Change">
                             <input id="id_form-0-quantity" min="0" max="100" name="number" value="<?php print($values['item_count']);?>" type="number">
                             <input type="hidden" name="hidden_id" value="<?php print($values['item_id']);?>">
-                            <input type="submit" name="submit" value="Change">
+                            <input type="submit" name="submit" value="Aantal aanpassen">
                         </form>
                     </td>
                 </tr>
@@ -105,7 +105,7 @@ foreach ($_SESSION["shopping_cart"] as $keys => $values) {
         <td>
             <br>
             <?php
-            print ("subtotaal: € " . number_format($subtotaal, 2) . " <br>");
+            print ("Subtotaal: € " . number_format($subtotaal, 2) . " <br>");
             print ("Verzendkosten: € $verzendkosten <br>");
             ?>
             ---------------------------------------

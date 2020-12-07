@@ -1,3 +1,5 @@
+<title>Nerdygadgets - Aanpassen</title>
+
 <?php
 include __DIR__ . "/header.php";
 
@@ -13,7 +15,7 @@ include __DIR__ . "/header.php";
 
 <form action="" method="POST">
     <input type="text" name="phone" placeholder="telefoonnummer"/>
-    <input type="text" name="address" placeholder="address"/>
+    <input type="text" name="adres" placeholder="address"/>
     <input type="text" name="email" placeholder="email"/>
 
     <input type="submit" name="update" value="update"/>

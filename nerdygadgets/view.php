@@ -1,3 +1,7 @@
+<title>Nerdygadgets - product</title>
+<script src="https://kit.fontawesome.com/3929e16ef5.js" crossorigin="anonymous"></script>
+<script src="{% static 'network/functions.js' %}"></script>
+
 <?php
 $Connection = mysqli_connect("localhost", "root", "", "nerdygadgets");
 mysqli_set_charset($Connection, 'latin1');
@@ -198,7 +202,27 @@ if(isset($_POST["toevoegen"])){
                             <input class="ToevoegenKnop" type="submit" name="toevoegen" value="Toevoegen aan Winkelmand">
                             <input class="ToevoegenKnop" type="submit" name="wenslijst" value="Toevoegen aan Wenslijst">
                         </form>
-                        <?php $rand = rand(10, 30); print $rand?> mensen kijken nu naar dit product!
+                        <div class="h_container">
+                            <i id="heart" class="far fa-heart">  </i>
+                        </div>
+                        <br>
+                        <br>
+                     <div class="rainbow">
+                        <script type="text/javascript">
+                            (function() {
+                                var blinks = document.getElementsByTagName('blink');
+                                var visibility = 'hidden';
+                                window.setInterval(function() {
+                                    for (var i = blinks.length - 1; i >= 0; i--) {
+                                        blinks[i].style.visibility = visibility;
+                                    }
+                                    visibility = (visibility === 'visible') ? 'hidden' : 'visible';
+                                }, 250);
+                            })();
+                        </script>
+                        <blink> <strong> <?php $rand = rand(10, 30); print $rand?>  mensen kijken naar dit product! </strong></blink>
+                     </div>
+
                     </div>
                 </div>
             </div>
@@ -207,7 +231,7 @@ if(isset($_POST["toevoegen"])){
         <div id="StockItemDescription">
             <h3>Artikel beschrijving</h3>
             <p><?php print $Result['SearchDetails']; ?></p>
-            <h5>Bestel voor 18:00 en krijg je bestelling MORGEN binnen!</h5>
+            <h5>Bestel voor 18.00 en krijg je bestelling MORGEN in huis!</h5>
         </div>
         <div id="StockItemSpecifications">
             <h3>Artikel specificaties</h3>
