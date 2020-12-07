@@ -80,7 +80,7 @@
                 <input required id="street" type="text" placeholder="Straatnaam" name="street"><br>
                 <input required id="housenumber" type="text" placeholder="Huisnummer" name="housenumber"><br>
                 <input required id="postalcode" type="text" placeholder="" name="postalcode"><br>
-                <input required id="city" type="text" placeholder="Stad" name="City"><br>
+                <input required id="city" type="text" placeholder="Stad" name="city"><br>
 
                 <div class="left">
                     <input type="checkbox" class="small" onclick="myFunction()"> Wachtwoord tonen<br><br>
@@ -147,16 +147,18 @@ VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         $selectstmt = mysqli_prepare($Connection, $select);
         mysqli_stmt_bind_param($selectstmt, "s", $fullname, );
         mysqli_stmt_execute($selectstmt);
-        $SelectResult = mysqli_stmt_get_result($Statement);
-        $SelectResult = mysqli_fetch_all($SelectResult, MYSQLI_ASSOC);
-        $selectarray = $SelectResult[0];
+        $SelectResult = mysqli_stmt_get_result($selectstmt);
+        $SelectResult2 = mysqli_fetch_all($SelectResult, MYSQLI_ASSOC);
+        $selectarray = $SelectResult2[0];
         $userID = $selectarray["PersonID"];
 
         //insert customer
-        $Insertcustommer = "INSERT INTO customers (CustomerName, PrimaryContactPersonID, DeliveryMethodID, CreditLimit, AccountOpendDate, StandardDiscountPercentage, IsOnCreditHold, PaymentDays, PhoneNumber, DeliveryAddressLine1, DeliveryAddressLine2, DeliveryPostalCode, LastEditedBy )";
+        $Insertcustommer = "INSERT INTO customers (CustomerName, PrimaryContactPersonID,CustomerCategoryID, DeliveryMethodID, DeliveryCityID,PostalCityID, CreditLimit, AccountOpenedDate, StandardDiscountPercentage, IsOnCreditHold, PaymentDays, PhoneNumber, DeliveryAddressLine1, DeliveryAddressLine2, DeliveryPostalCode, LastEditedBy )
+                            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         $stmt = mysqli_prepare($Connection, $Insertcustommer);
-        mysqli_stmt_bind_param($stmt, "", $fullname, $userID, $deliverymethod , $creditlimit, $currentdate, $discount, $zero, $seven, $phonenumber, $city, $line2, $postalcode, $number);
+        mysqli_stmt_bind_param($stmt, "siiiiiisiiiisssi", $fullname, $userID, $number, $deliverymethod, $number, $number, $creditlimit, $currentdate, $discount, $zero, $seven, $phonenumber, $city, $line2, $postalcode, $number);
+        mysqli_stmt_execute($stmt);
         echo '<script>alert("Succesvol geregistreerd je wordt doorverwezen naar de login pagina")</script>';
         sleep(2);
         echo '<script>window.location="login.php"</script>';

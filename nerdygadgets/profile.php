@@ -21,9 +21,12 @@ $Stmnt = mysqli_prepare($Connection, $selectCustomer);
 mysqli_stmt_bind_param($Stmnt, "i", $user_id);
 mysqli_stmt_execute($Stmnt);
 $customerResult = mysqli_stmt_get_result($Stmnt);
-$custommer = mysqli_fetch_all($customerResult, MYSQLI_ASSOC);
-$customerarray = $custommer[0];
+$customer = mysqli_fetch_all($customerResult, MYSQLI_ASSOC);
+$customerarray = $customer[0];
 
+$city = $customerarray["DeliveryAddressLine1"];
+$address = $customerarray["DeliveryAddressLine2"];
+$postalcode = $customerarray["DeliveryPostalCode"]
 
 ?>
 <!DOCTYPE html>
@@ -66,12 +69,15 @@ $customerarray = $custommer[0];
     <a href="orders.php">bestelgeschiedenis</a>
     <br>
     <br>
-</div>
-<br>
-<br>
-<div class="address" >
     <h2>Adresgegevens</h2>
+    <p>straat: <?php print($address); ?></p>
+    <p>Stad: <?php print($city); ?></p>
+    <p>postcode</p>
+
 </div>
+<br>
+<br>
+
 
 </body>
 
