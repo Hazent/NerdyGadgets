@@ -100,9 +100,8 @@
         $array = $Result["0"];
         $Hashedpassword = $array["Hashedpassword"];
         if(password_verify($wachtwoord, $Hashedpassword)) {
-            echo '<script>alert("Succesvol ingelogd je wordt met 5 seconden doorverwezen naar de winkel pagina")</script>';
-            $_SESSION['personId'] = $array["PersonID"];
-            sleep(5);
+            echo '<script>alert("Succesvol ingelogd je wordt doorverwezen naar de winkel pagina")</script>';
+            $_SESSION['personId4'] = $array["PersonID"];
             echo '<script>window.location="index.php"</script>';
         } else {
             echo '<script>alert("Wachtwoord en gebruikersnaam komen niet overeen")</script>';

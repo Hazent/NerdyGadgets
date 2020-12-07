@@ -162,7 +162,6 @@ VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         mysqli_stmt_bind_param($stmt, "siiiiiiiiisiiiisssi", $fullname, $number, $number, $number, $userID, $userID, $deliverymethod, $number, $number, $creditlimit, $currentdate, $discount, $zero, $seven, $phonenumber, $city, $line2, $postalcode, $number);
         mysqli_stmt_execute($stmt);
         echo '<script>alert("Succesvol geregistreerd je wordt doorverwezen naar de login pagina")</script>';
-        sleep(2);
         echo '<script>window.location="login.php"</script>';
     }
     ?>
