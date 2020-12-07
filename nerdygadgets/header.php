@@ -62,13 +62,14 @@ require "connect.php";
                 $HeaderStockGroups = mysqli_stmt_get_result($Statement);
 
                 $user = array();
-                    if (isset($_SESSION["userId"])){
+                    if (isset($_SESSION["personId"])){
                         $query2 = "SELECT IsEmployee
                         FROM people
-                        WHERE PersonID = ".$_SESSION['userId'];
+                        WHERE PersonID = ".$_SESSION['personId'];
 
                         $result = mysqli_query($Connection, $query2);
-                        $user = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                        $array = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                        $user = $array[0];
                     }
 
                 foreach ($HeaderStockGroups as $HeaderStockGroup) {
@@ -86,9 +87,9 @@ require "connect.php";
                 <li>
                     <a href="contact.php" class="HrefDecoration">Contact</a>
                 </li>
-                <?php if(isset($_SESSION['userId'])){
+                <?php if(isset($_SESSION['personId'])){
                     if($user['IsEmployee'] == 1){?>
-                    }
+
                 <li>
                     <a href="contact-admin.php" class="HrefDecoration">Contact-admin</a>
                 </li>
@@ -103,14 +104,15 @@ require "connect.php";
                 }?>
 
                 <a href="browse.php" class="HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i> Zoeken </a>
-                &ensp;|&ensp;
-                <a href="login.php" class="HrefDecoration"><i type="submit" ></i> Login</a>
-                &ensp;|&ensp;
-                <a href="winkelmand.php" class="HrefDecoration"><i type="submit" ></i> Winkelmand</a>
                 <?php if (empty($_SESSION["personId"])) {
                     echo "&ensp;|&ensp;";
-                    echo ("<a href=" ."login.php" . " " . "class=" . "HrefDecoration" . "><i type=" . "submit" . "></i>Login</a>");
+                    echo ("<a href=" ."login.php" . " " . "class=" . "HrefDecoration" . "><i type=" . "submit" . "></i>Inloggen</a>");
                 }?>
+                &ensp;|&ensp;
+                <a href="winkelmand.php" class="HrefDecoration"><i type="submit" ></i> Winkelmand</a>
+                &ensp;|&ensp;
+                <a href="Wenslijst.php" class="HrefDecoration"><i type="submit" ></i>♥</a>
+
             </li>
         </ul>
     </div>

@@ -21,17 +21,18 @@ if (isset($_GET["submit"])) {
         }
     }
 }
-foreach ($_SESSION["shopping_cart"] as $keys => $values) {
-    $Query = "
+
+?>
+<?php if (!empty($_SESSION["shopping_cart"])) {
+    foreach ($_SESSION["shopping_cart"] as $keys => $values) {
+        $Query = "
                     SELECT  StockItemID, ImagePath
                     FROM stockitemimages";
-    $Statement = mysqli_prepare($Connection, $Query);
-    mysqli_stmt_execute($Statement);
-    $Images = mysqli_stmt_get_result($Statement);
-    $Images = mysqli_fetch_all($Images, MYSQLI_ASSOC);
-}
-?>
-<?php if (!empty($_SESSION["shopping_cart"])) { ?>
+        $Statement = mysqli_prepare($Connection, $Query);
+        mysqli_stmt_execute($Statement);
+        $Images = mysqli_stmt_get_result($Statement);
+        $Images = mysqli_fetch_all($Images, MYSQLI_ASSOC);
+    }?>
 <div class="IndexStyle">
     <table class="BorderWinkelmand">
         <tr>

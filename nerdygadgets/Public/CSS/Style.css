@@ -502,3 +502,14 @@ ul#ul-class-price li {
     font-size: 20px;
     position: center;
 }
+
+.Textcontact {
+    color: #fff;
+    font-family: vortice-concept, sans-serif;
+    font-size: 30px;
+    text-transform: uppercase;
+    font-weight: bold;
+    width: 100%;
+    margin: 0 auto;
+    text-align:  center;
+}

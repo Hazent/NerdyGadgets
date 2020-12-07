@@ -33,6 +33,7 @@ $email = $array["EmailAddress"];
 <div class="content">
 <p>Telefoon nr: <?php print($phonenumber) ?></p>
 <p>email: <?php print($email) ?></p>
+    <a href="orders.php">Bestelgeschiedenis</a>
  </div>
 
 </body>
