@@ -31,7 +31,7 @@ $email = $array["EmailAddress"];
 </head>
 
 <body>
-<<<<<<< HEAD
+
 <div class="head">
 <h1>Profiel van <?php print($fullname) ?></h1>
 </div>
@@ -40,7 +40,7 @@ $email = $array["EmailAddress"];
 <p>email: <?php print($email) ?></p>
     <a href="orders.php">Bestelgeschiedenis</a>
  </div>
-=======
+
     <div class="head">
         <h1>Profiel van <?php print($fullname) ?></h1>
     </div>
@@ -49,7 +49,7 @@ $email = $array["EmailAddress"];
         <p>email: <?php print($email) ?></p>
     </div>
     <a href="orders.php">bestelgeschiedenis</a>
->>>>>>> 2876c82601000d6f792d69fae34f5a2fd88de9c2
+
 
 </body>
 
