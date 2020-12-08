@@ -82,7 +82,7 @@
 
 
         $Query = "
-        SELECT PersonID, LogonName, Hashedpassword
+        SELECT PersonID, LogonName, Hashedpassword, PreferredName
         FROM people
         WHERE LogonName = ?";
 
@@ -99,6 +99,7 @@
         if(password_verify($wachtwoord, $Hashedpassword)) {
             echo '<script>alert("Succesvol ingelogd je wordt met 5 seconden doorverwezen naar de winkel pagina")</script>';
             $_SESSION['personId'] = $array["PersonID"];
+            $_SESSION['personName'] = $array["PreferredName"];
             sleep(5);
             echo '<script>window.location="index.php"</script>';
         } else {

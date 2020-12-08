@@ -98,9 +98,10 @@ require "connect.php";
         <ul id="ul-class-navigation">
             <li>
                 <?php if (!empty($_SESSION["personId"])) {
-                    echo ("<a href=" . "profile.php" ." " . "class=" . "HrefDecoration" . " " .  "style=" . "margin-right:" . "10px" . " " . "><i class=" . "fas" . "fa-user" . " style=" . "color:#676EFF;" . "></i>Profiel</a>");
-                    echo "&ensp;|&ensp;";
-                }?>
+                    ?>
+                    <a href="profile.php" style="margin-right: 10px; color: white;"><i class="fas fa-user" style="color:#676EFF;"></i> <?php echo $_SESSION['personName'];?></a>
+                    &ensp;|&ensp;
+               <?php }?> 
 
                 <a href="browse.php" class="HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i> Zoeken </a>
                 &ensp;|&ensp;
