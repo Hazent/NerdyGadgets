@@ -70,7 +70,6 @@ $postalcode = $customerarray["DeliveryPostalCode"];
 <br>
 <br>
 
-
 </body>
 
 </html>

@@ -40,12 +40,6 @@ $orders = mysqli_fetch_all($Result, MYSQLI_ASSOC);
                 </thead>
                 <tbody>';
 
-
-
-
-
-
-
             foreach ($orderlines as $row) {
                 $total = $total + $row["Quantity"]*$row["UnitPrice"];
                 echo "<tr>";
@@ -74,8 +68,6 @@ $orders = mysqli_fetch_all($Result, MYSQLI_ASSOC);
         }
 
         ?>
-
-
 
     </div>
 </div>
