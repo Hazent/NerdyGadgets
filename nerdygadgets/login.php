@@ -42,6 +42,8 @@
             background-color: #397a3f;
         }
 
+
+
     </style>
 </head>
 <body>
@@ -53,6 +55,7 @@
                 <p>
                     <input type="text" placeholder="Gebruikersnaam*" class="text" name="naam" required>
                     <input type="password" placeholder="Wachtwoord*" class="text" name="wachtwoord" id="myInput" required>
+
 
                 <div class="left">
                     <input type="checkbox" class="small" onclick="myFunction()"> Wachtwoord tonen<br><br>
