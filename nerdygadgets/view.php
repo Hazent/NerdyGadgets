@@ -7,6 +7,8 @@ $Connection = mysqli_connect("localhost", "root", "", "nerdygadgets");
 mysqli_set_charset($Connection, 'latin1');
 include __DIR__ . "/header.php";
 
+
+// get stockitem
 $Query = " 
            SELECT SI.StockItemID,
             (RecommendedRetailPrice*(1+(TaxRate/100))) AS SellPrice, 
@@ -22,7 +24,6 @@ $Query = "
             WHERE SI.stockitemid = ?
             GROUP BY StockItemID";
 
-$ShowStockLevel = 1000;
 $Statement = mysqli_prepare($Connection, $Query);
 mysqli_stmt_bind_param($Statement, "i", $_GET['id']);
 mysqli_stmt_execute($Statement);
@@ -32,6 +33,7 @@ if ($ReturnableResult && mysqli_num_rows($ReturnableResult) == 1) {
 } else {
     $Result = null;
 }
+
 //Get Images
 $Query = "
                 SELECT ImagePath

@@ -42,8 +42,6 @@
             background-color: #397a3f;
         }
 
-
-
     </style>
 </head>
 <body>
