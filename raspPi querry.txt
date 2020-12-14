@@ -1,0 +1,2 @@
+CREATE USER 'raspPi'@'10.80.17.1' IDENTIFIED BY '';
+GRANT ALL PRIVILEGES ON *.* TO 'raspPi'@'10.80.17.1' with grant option;

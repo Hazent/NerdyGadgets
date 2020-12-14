@@ -6,9 +6,9 @@ require __DIR__ . "/connect.php"; ?>
 
 $user_id = $_SESSION["personId"];
 
-$selectpeople = "SELECT * FROM people WHERE PersonId = ?";
+$query = "SELECT * FROM people WHERE PersonId = ?";
 
-$Statement = mysqli_prepare($Connection, $selectpeople);
+$Statement = mysqli_prepare($Connection, $query);
 mysqli_stmt_bind_param($Statement, "i", $user_id);
 mysqli_stmt_execute($Statement);
 $Result = mysqli_stmt_get_result($Statement);
@@ -30,46 +30,44 @@ $city = $customerarray["DeliveryAddressLine1"];
 $address = $customerarray["DeliveryAddressLine2"];
 $postalcode = $customerarray["DeliveryPostalCode"];
 
+if(isset($_GET['submit'])){
+    unset($_SESSION['personName']);
+    unset($_SESSION['personId']);
+    echo "<script>alert('U bent uitgeloggd')</script>";
+    echo "<script>window.location='index.php'</script>";
+}
 ?>
-<!DOCTYPE html>
-<html lang="nl">
+<style>
+    .content1 {
+        position: absolute;
+        margin: auto;
 
-<head>
-    <title>Mijn gegevens</title>
-    <meta charset="UTF-8">
-    <style>
-        .content {
-            position: absolute;
-            margin: auto;
+        margin-left: 40%;
+        margin-top: 2%;
+        width: 20%;
 
-            margin-left: 40%;
-            margin-top: 2%;
-            width: 14%;
-
-            border:1px solid white;
-        }
-    </style>
-</head>
-
-<body>
-<div class="content">
+        border:1px solid white;
+    }
+</style>
+<div class="content1">
     <h1>Mijn gegevens</h1>
     <br>
     <label for="fullname">Naam:</label> <strong id="fullname"><?php print(" " .$fullname)?></strong>
     <p>Tel nr: <?php print($phonenumber) ?></p>
-    <p>email: <?php print($email) ?></p>
-    <a href="orders.php">bestelgeschiedenis</a>
+    <p>E-Mail: <?php print($email) ?></p>
+    <a href="orders.php">Bestelgeschiedenis</a>
     <br>
     <br>
     <h2>Adresgegevens</h2>
-    <p>straat: <?php print($address); ?></p>
+    <p>Straat: <?php print($address); ?></p>
     <p>Stad: <?php print($city); ?></p>
-    <p>postcode: <?php print($postalcode)?></p>
-
+    <p>Postcode: <?php print($postalcode)?></p>
+    <br>
+    <form name="LogUit">
+        <button class="ToevoegenKnop" type="submit" name="submit" style="text-algin: center;">Uitloggen</button>
+    </form>
 </div>
 <br>
 <br>
 
-</body>
-
-</html>
+<?php require __DIR__ . "./footer.php"; ?>
