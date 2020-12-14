@@ -8,7 +8,7 @@ mysqli_set_charset($Connection, 'latin1');
 include __DIR__ . "/header.php";
 
 $Query = " 
-           SELECT SI.StockItemID,
+           SELECT SI.StockItemID, IsChillerStock, 
             (RecommendedRetailPrice*(1+(TaxRate/100))) AS SellPrice, 
             StockItemName,
             CONCAT('Voorraad: ',QuantityOnHand)AS QuantityOnHand,
@@ -32,6 +32,7 @@ if ($ReturnableResult && mysqli_num_rows($ReturnableResult) == 1) {
 } else {
     $Result = null;
 }
+
 //Get Images
 $Query = "
                 SELECT ImagePath
@@ -179,6 +180,20 @@ if(isset($_POST["toevoegen"])){
                 <?php print $Result['StockItemName']; ?>
             </h2>
             <div class="QuantityText"><?php print $Result['QuantityOnHand']; ?></div>
+            <?php if ($Result['IsChillerStock']) {
+                $Query = "
+                SELECT Temperature
+                FROM coldroomtemperatures
+                WHERE ColdRoomSensorNumber = 1";
+
+                $Statement = mysqli_prepare($Connection, $Query);
+                mysqli_stmt_execute($Statement);
+                $temp = mysqli_stmt_get_result($Statement);
+                $temp = mysqli_fetch_all($temp, MYSQLI_ASSOC);
+                foreach ($temp as $koud => $kouder) {
+                    print ("Temperatuur: " . $kouder['Temperature'] . " °C");
+                }
+            }?>
             <div id="StockItemHeaderLeft">
                 <div class="CenterPriceLeft">
                     <div class="CenterPriceLeftChild">
@@ -232,6 +247,7 @@ if(isset($_POST["toevoegen"])){
             <h3>Artikel beschrijving</h3>
             <p><?php print $Result['SearchDetails']; ?></p>
             <h5>Bestel voor 18.00 en krijg je bestelling MORGEN in huis!</h5>
+
         </div>
         <div id="StockItemSpecifications">
             <h3>Artikel specificaties</h3>

@@ -12,6 +12,9 @@ if (isset($_GET["action"])) {
     }
 }
 if (isset($_GET["submit"])) {
+    if($_GET['number'] == "") {
+        $_GET['number'] = 0;
+    }
     $count = $_GET['number'];
     foreach ($_SESSION["shopping_cart"] as $keys => $values) {
         if ($values["item_id"] == $_GET["hidden_id"]) {
@@ -75,9 +78,6 @@ if (isset($_GET["submit"])) {
                     <td>€ <?php echo number_format($values["item_price"], 2); ?></td>
 
                     <td>€ <?php
-//                        if (!isset($values["item_count"])) {
-//                            $values["item_count"] = 1;
-//                        }
                         echo number_format($values["item_price"] * $values["item_count"], 2); ?></td>
 
                     <td><a class="DeleteKnop" href="winkelmand.php?action=delete&id=<?php echo $values['item_id'] ?>">Delete</a></td>

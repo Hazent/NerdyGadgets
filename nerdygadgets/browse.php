@@ -211,6 +211,25 @@ if (isset($amount)) {
 </div>
 <div id="ResultsArea" class="Browse">
     <?php
+    $Query = "
+    SELECT Temperature
+    FROM coldroomtemperatures
+    WHERE ColdRoomSensorNumber = 1";
+
+    $Statement = mysqli_prepare($Connection, $Query);
+    mysqli_stmt_execute($Statement);
+    $temp = mysqli_stmt_get_result($Statement);
+    $temp = mysqli_fetch_all($temp, MYSQLI_ASSOC);
+
+    $Query = "
+    SELECT StockItemID, IsChillerStock
+    FROM stockitems";
+
+    $Statement = mysqli_prepare($Connection, $Query);
+    mysqli_stmt_execute($Statement);
+    $chill = mysqli_stmt_get_result($Statement);
+    $chill = mysqli_fetch_all($chill, MYSQLI_ASSOC);
+
     if (isset($ReturnableResult) && count($ReturnableResult) > 0) {
         foreach ($ReturnableResult as $row) {
             ?>
@@ -231,6 +250,18 @@ if (isset($amount)) {
                             <h1 class="StockItemPriceText"><?php print sprintf("€ %0.2f", $row["SellPrice"]); ?></h1>
                             <h6>Inclusief BTW </h6>
                             <h6><?php $rand = rand(10, 30); print $rand?> mensen kijken nu!</h6>
+                            <h6>
+                            <?php
+                            foreach ($temp as $temperature => $test) {
+                                foreach ($chill as $kou => $kouder) {
+                                    if ($row['StockItemID'] == $kouder['StockItemID']) {
+                                        if ($kouder['IsChillerStock'] == 1) {
+                                            print ("Temperatuur: " . $test["Temperature"] . " °C");
+                                        }
+                                    }
+                                }
+                            }?>
+                            </h6>
                         </div>
                     </div>
                     <h1 class="StockItemID">Artikelnummer: <?php print $row["StockItemID"]; ?></h1>
