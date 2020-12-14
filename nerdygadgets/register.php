@@ -147,7 +147,7 @@ VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         // get id from custommer
         $select = "SELECT PersonID FROM people WHERE FullName = ?";
         $selectstmt = mysqli_prepare($Connection, $select);
-        mysqli_stmt_bind_param($selectstmt, "s", $fullname, );
+        mysqli_stmt_bind_param($selectstmt, "s", $fullname );
         mysqli_stmt_execute($selectstmt);
         $SelectResult = mysqli_stmt_get_result($selectstmt);
         $SelectResult2 = mysqli_fetch_all($SelectResult, MYSQLI_ASSOC);
