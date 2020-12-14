@@ -81,7 +81,7 @@
                 <h2>Adres gegevens</h2>
                 <input required id="street" type="text" placeholder="Straatnaam" name="street"><br>
                 <input required id="housenumber" type="text" placeholder="Huisnummer" name="housenumber"><br>
-                <input required id="postalcode" type="text" placeholder="" name="postalcode"><br>
+                <input required id="postalcode" type="text" placeholder="Postcode" name="postalcode"><br>
                 <input required id="city" type="text" placeholder="Stad" name="city"><br>
 
                 <div class="left">
