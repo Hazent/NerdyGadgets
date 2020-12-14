@@ -49,8 +49,8 @@ $R = mysqli_fetch_all($R, MYSQLI_ASSOC);
 if ($R) {
     $Images = $R;
 }
-if(isset($_POST["wenslijst"])){
-    if(isset($_SESSION["wenslijst"])){
+if(isset($_POST["wenslijst"]) || isset($_GET['action'])){
+    if(isset($_SESSION["wenslijst"]) || $_GET['action'] == 'wish'){
         $item_array_id2 = array_column($_SESSION["wenslijst"], "item_id");
         if(!in_array($Result["StockItemID"], $item_array_id2)){
             $count2 = count($_SESSION["wenslijst"]);
@@ -58,8 +58,7 @@ if(isset($_POST["wenslijst"])){
                 'item_id' => $Result['StockItemID'],
                 //'item_picture' => $Images[0],
                 'item_name' => $Result['StockItemName'],
-                'item_price' => $_POST['hiddenPrice'],
-                'item_count' => $_POST['count']
+                'item_price' => $Result['SellPrice']
             );
             $_SESSION["wenslijst"][$count2] = $item_array2;
             echo '<script>alert("Product Toegevoegd")</script>';
@@ -72,8 +71,7 @@ if(isset($_POST["wenslijst"])){
             'item_id' => $Result["StockItemID"],
             //'item_picture' => $Images[0],
             'item_name' => $Result['StockItemName'],
-            'item_price' => $_POST['hiddenPrice'],
-            'item_count' => $_POST['count']
+            'item_price' => $Result['SellPrice']
         );
         $_SESSION['wenslijst'][0] = $item_array2;
         echo '<script>alert("Product Toegevoegd")</script>';
@@ -216,10 +214,9 @@ if(isset($_POST["toevoegen"])){
                             <input type="hidden" name="hiddenName" value="<?php print $Result['StockItemName'];?>">
                             <input type="hidden" name="hiddenPrice" value="<?php print $Result['SellPrice'];?>">
                             <input class="ToevoegenKnop" type="submit" name="toevoegen" value="Toevoegen aan Winkelmand">
-                            <input class="ToevoegenKnop" type="submit" name="wenslijst" value="Toevoegen aan Wenslijst">
                         </form>
                         <div class="h_container">
-                            <i id="heart" class="far fa-heart">  </i>
+                            <a href="view.php?id=<?php echo $Result['StockItemID']?>&action=wish"><i id="heart" class="far fa-heart">  </i></a>
                         </div>
                         <br>
                         <br>
@@ -236,7 +233,7 @@ if(isset($_POST["toevoegen"])){
                                 }, 250);
                             })();
                         </script>
-                        <blink> <strong> <?php $rand = rand(10, 30); print $rand?>  mensen kijken naar dit product! </strong></blink>
+                        <strong> <?php $rand = rand(10, 30); print $rand?>  mensen kijken naar dit product! </strong>
                      </div>
 
                     </div>

@@ -263,6 +263,8 @@ ul#ul-class-price li {
 }
 .HrefDecoration {
     color: #ffffff;
+    font-family: Sun-Moon, fantasy;
+    font-size: 12px;
 }
 .HrefDecoration:hover, .HrefDecoration:active {
     text-decoration: none;

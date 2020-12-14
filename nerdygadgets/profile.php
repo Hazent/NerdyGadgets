@@ -6,7 +6,7 @@ require __DIR__ . "/connect.php"; ?>
 
 $user_id = $_SESSION["personId"];
 
-$query = "SELECT * FROM people WHERE PersonId = ?";
+$query = "SELECT * FROM people WHERE PersonID = ?";
 
 $Statement = mysqli_prepare($Connection, $query);
 mysqli_stmt_bind_param($Statement, "i", $user_id);
@@ -18,7 +18,7 @@ $fullname = $array["FullName"];
 $phonenumber = $array["PhoneNumber"];
 $email = $array["EmailAddress"];
 
-$selectCustomer = "SELECT * FROM Customers WHERE PrimaryContactPersonID = ?";
+$selectCustomer = "SELECT * FROM customers WHERE PrimaryContactPersonID = ?";
 $Stmnt = mysqli_prepare($Connection, $selectCustomer);
 mysqli_stmt_bind_param($Stmnt, "i", $user_id);
 mysqli_stmt_execute($Stmnt);
@@ -30,7 +30,7 @@ $city = $customerarray["DeliveryAddressLine1"];
 $address = $customerarray["DeliveryAddressLine2"];
 $postalcode = $customerarray["DeliveryPostalCode"];
 
-if(isset($_GET['submit'])){
+if(isset($_GET['logout'])){
     unset($_SESSION['personName']);
     unset($_SESSION['personId']);
     echo "<script>alert('U bent uitgeloggd')</script>";
@@ -64,7 +64,7 @@ if(isset($_GET['submit'])){
     <p>Postcode: <?php print($postalcode)?></p>
     <br>
     <form name="LogUit">
-        <button class="ToevoegenKnop" type="submit" name="submit" style="text-algin: center;">Uitloggen</button>
+        <button class="ToevoegenKnop" type="submit" name="logout" style="text-algin: center;">Uitloggen</button>
     </form>
 </div>
 <br>

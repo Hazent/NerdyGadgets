@@ -205,7 +205,7 @@ if (isset($amount)) {
                 } ?>>Naam aflopend
                 </option>
             </select>
-            Order before 6:00 PM and get your order TOMORROW!
+            <p style="font-size: 35px;">Bestel voor 18:00 en ontvang MORGEN je bestelling!</p>
     </form>
 </div>
 </div>
@@ -250,23 +250,24 @@ if (isset($amount)) {
                             <h1 class="StockItemPriceText"><?php print sprintf("€ %0.2f", $row["SellPrice"]); ?></h1>
                             <h6>Inclusief BTW </h6>
                             <h6><?php $rand = rand(10, 30); print $rand?> mensen kijken nu!</h6>
-                            <h6>
-                            <?php
-                            foreach ($temp as $temperature => $test) {
-                                foreach ($chill as $kou => $kouder) {
-                                    if ($row['StockItemID'] == $kouder['StockItemID']) {
-                                        if ($kouder['IsChillerStock'] == 1) {
-                                            print ("Temperatuur: " . $test["Temperature"] . " °C");
-                                        }
-                                    }
-                                }
-                            }?>
-                            </h6>
+
                         </div>
                     </div>
                     <h1 class="StockItemID">Artikelnummer: <?php print $row["StockItemID"]; ?></h1>
                     <p class="StockItemName"><?php print $row["StockItemName"]; ?></p>
                     <p class="StockItemComments"><?php print $row["MarketingComments"]; ?></p>
+                    <h6>
+                        <?php
+                        foreach ($temp as $temperature => $test) {
+                            foreach ($chill as $kou => $kouder) {
+                                if ($row['StockItemID'] == $kouder['StockItemID']) {
+                                    if ($kouder['IsChillerStock'] == 1) {
+                                        print ("Temperatuur: " . $test["Temperature"] . " °C");
+                                    }
+                                }
+                            }
+                        }?>
+                    </h6>
                     <h4 class="ItemQuantity"><?php print $row["QuantityOnHand"]; ?></h4>
                 </div>
             </a>

@@ -19,7 +19,7 @@ require "connect.php";
     </style>
     <meta charset="ISO-8859-1">
     <title>NerdyGadgets</title>
-    <link rel="stylesheet" href="Public/CSS/Style.css?v=3" type="text/css">
+    <link rel="stylesheet" href="Public/CSS/Style.css?v=4" type="text/css">
     <link rel="stylesheet" href="Public/CSS/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="Public/CSS/nha3fuq.css">
     <link rel="apple-touch-icon" sizes="57x57" href="Public/Favicon/apple-icon-57x57.png">
@@ -80,9 +80,7 @@ require "connect.php";
                     <?php
                 }
                 ?>
-                <li>
-                    <a href="categories.php" class="HrefDecoration">Alle categorieën</a>
-                </li>
+
                 <li>
                     <a href="contact.php" class="HrefDecoration">Contact</a>
                 </li>
@@ -99,18 +97,22 @@ require "connect.php";
             <li>
                 <?php if (!empty($_SESSION["personId"])) {
                     ?>
-                    <a href="profile.php" style="margin-right: 10px; color: white;"><i class="fas fa-user" style="color:#676EFF;"></i> <?php echo $_SESSION['personName'];?></a>
-                    &ensp;|&ensp;
-               <?php }?> 
+                    <a href="profile.php" class="HrefDecoration"><i class="fas fa-user" style="color:#676EFF;"></i> <?php echo $_SESSION['personName'];?></a>
+                    |&ensp;
+               <?php }?>
 
-                <a href="browse.php" class="HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i> Zoeken </a>
+
                 <?php if (empty($_SESSION["personId"])) {
-                    echo "&ensp;|&ensp;";
-                    echo ("<a href=" ."login.php" . " " . "class=" . "HrefDecoration" . "><i type=" . "submit" . "></i>Login</a>");
-                }?>
-                &ensp;|&ensp;
-                <a href="winkelmand.php" class="HrefDecoration"><i type="submit" ></i> Winkelmand</a>
 
+                    echo ("<a href=" ."login.php" . " " . "class=" . "HrefDecoration" . "><i type=" . "submit" . "></i>Login</a>");
+                    echo " | ";
+
+                }?>
+                <a href="winkelmand.php" class="HrefDecoration"><i type="submit" ></i> Winkelmand </a>
+                 |
+                <?php if(!empty($_SESSION["personId"])){ ?>
+                    <a href="Wenslijst.php" style="margin-right: 10px; color: white;"><i id="heart" class="far fa-heart"> </i></a>
+                <?php }?>
             </li>
         </ul>
     </div>

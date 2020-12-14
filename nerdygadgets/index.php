@@ -24,7 +24,7 @@ include __DIR__ . "/header.php";
         <div class="HomePageStockItemPicture"></div>
     </div>
 </div>
-<div id="myModal" class="modal fade">
+<div id="myModal" class="modal fade" style="margin-top: 20%;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
